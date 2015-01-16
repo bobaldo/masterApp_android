@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Convertitore</string>
+    <string name="lunghezza">LUNGHEZZA</string>
+    <string-array name="lista_lunghezza">
+        <item>metro</item>
+        <item>centimetro</item>
+        <item>pollice</item>
+        <item>piede</item>
+        <item>iard</item>
+    </string-array>
+
+    <string name="title_activity_all_convert">AllConvertActivity</string>
+    <string name="convertAll">Converti in tutto</string>
+</resources>
