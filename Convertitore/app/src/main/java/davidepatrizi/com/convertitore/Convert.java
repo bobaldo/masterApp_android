@@ -8,7 +8,13 @@ import java.text.DecimalFormat;
  * Created by Bobaldo on 16/01/2015.
  */
 public class Convert {
-    public static Lunghezza getEnumLabel(String label) {
+    private DecimalFormat df;
+
+    public Convert(){
+        df = new DecimalFormat("####0.00");
+    }
+
+    public static Lunghezza getEnumLunghezza(String label) {
         if (label.equals("metro"))
             return Lunghezza.mt;
         else if (label.equals("centimetro"))
@@ -23,26 +29,79 @@ public class Convert {
             return Lunghezza.mt;
     }
 
-    private DecimalFormat df;
-    public double convert(Lunghezza from, Lunghezza to, Double value) {
-        Log.w("convert", "from " + from.toString() + " to " + to.toString() + " value " + Double.toString(value));
-        double convertor = 0.0;
-        convertor = getConvertor(from, to);
-        if(convertor == 0.0)
-            convertor = 1 / getConvertor(to,from);
-
-        return value * convertor;
+    public static Dimensione getEnumDimensione(String label){
+        if(label.equals("lunghezza"))
+            return Dimensione.lung;
+        else if(label.equals("peso"))
+            return  Dimensione.pes;
+        else
+            return Dimensione.lung;
     }
 
-    public String convertS(Lunghezza from, Lunghezza to, Double value) {
-        df = new DecimalFormat("####0.00");
-        Log.w("convert", "from " + from.toString() + " to " + to.toString() + " value " + Double.toString(value));
+    public static Peso getEnumPeso(String label) {
+        if (label.equals("kilogrammi")) {
+            return Peso.kg;
+        } else if (label.equals("grammi")) {
+            return Peso.g;
+        } else if (label.equals("libbre")) {
+            return Peso.l;
+        }else
+            return Peso.kg;
+    }
+
+    public String convert(Peso from, Peso to, Double value) {
+        //Log.w("convert", "from " + from.toString() + " to " + to.toString() + " value " + Double.toString(value));
         double convertor = 0.0;
         convertor = getConvertor(from, to);
-        if(convertor == 0.0)
-            convertor = 1 / getConvertor(to,from);
-
+        if (convertor == 0.0)
+            convertor = 1 / getConvertor(to, from);
         return df.format(value * convertor);
+    }
+
+    public String convert(Lunghezza from, Lunghezza to, Double value) {
+        //Log.w("convert", "from " + from.toString() + " to " + to.toString() + " value " + Double.toString(value));
+        double convertor = 0.0;
+        convertor = getConvertor(from, to);
+        if (convertor == 0.0)
+            convertor = 1 / getConvertor(to, from);
+        return df.format(value * convertor);
+    }
+
+    public double getConvertor(Peso from, Peso to){
+        double convertor =0.0;
+        switch (from) {
+            case kg:
+                switch (to) {
+                    case kg:
+                        convertor = 1.0;
+                        break;
+                    case g:
+                        convertor = 0.001;
+                        break;
+                    case l:
+                        convertor = 2.20462262;
+                        break;
+                }
+                break;
+            case g:
+                switch (to) {
+                    case g:
+                        convertor = 1;
+                        break;
+                    case l:
+                        convertor = 0.00220462262;
+                        break;
+                }
+                break;
+            case l:
+                switch (to) {
+                    case l:
+                        convertor = 1.0;
+                        break;
+                }
+                break;
+        }
+        return convertor;
     }
 
     public double getConvertor(Lunghezza from, Lunghezza to){

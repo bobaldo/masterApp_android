@@ -31,7 +31,7 @@ public class AllConvertActivity extends Activity {
 
             for(int i=1; i< sa.length; i++){
                 TextView tx = new TextView(this);
-                tx.setText(convertor.convertS(Lunghezza.mt, Convert.getEnumLabel(sa[i]), value) + " " + Convert.getEnumLabel(sa[i]));
+                tx.setText(convertor.convert(Lunghezza.mt, Convert.getEnumLunghezza(sa[i]), value) + " " + Convert.getEnumLunghezza(sa[i]));
                 tx.setTextSize(20);
                 ll.addView(tx);
             }

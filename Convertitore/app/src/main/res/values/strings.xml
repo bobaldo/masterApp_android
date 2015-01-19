@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Convertitore</string>
     <string name="lunghezza">LUNGHEZZA</string>
     <string-array name="lista_lunghezza">
@@ -9,6 +8,17 @@
         <item>pollice</item>
         <item>piede</item>
         <item>iard</item>
+    </string-array>
+
+    <string-array name="lista_peso">
+        <item>kilogrammi</item>
+        <item>grammi</item>
+        <item>libbre</item>
+    </string-array>
+
+    <string-array name="dimension">
+        <item>lunghezza</item>
+        <item>peso</item>
     </string-array>
 
     <string name="title_activity_all_convert">Tulle le conversioni</string>

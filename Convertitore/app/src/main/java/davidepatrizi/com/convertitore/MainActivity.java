@@ -10,34 +10,39 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
 public class MainActivity extends Activity implements TextWatcher, AdapterView.OnItemSelectedListener {
-    private DecimalFormat df;
     private Convert conv;
+    private Spinner dimension;
     private Spinner spDa;
     private Spinner spA;
     private EditText value;
     private TextView result;
+    private Dimensione dim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        spDa = (Spinner) findViewById(R.id.da);
-        spA = (Spinner) findViewById(R.id.a);
-        result = (TextView) findViewById(R.id.result);
-        value = (EditText) findViewById(R.id.toConvert);
+        dim = Dimensione.lung;
+        dimension=(Spinner)findViewById(R.id.dimension);
+        spDa = (Spinner)findViewById(R.id.da);
+        spA = (Spinner)findViewById(R.id.a);
+        result = (TextView)findViewById(R.id.result);
+        value = (EditText)findViewById(R.id.toConvert);
+        dimension.setOnItemSelectedListener(this);
         spDa.setOnItemSelectedListener(this);
         spA.setOnItemSelectedListener(this);
         value.addTextChangedListener(this);
         conv = new Convert();
-        df = new DecimalFormat("####0.00");
     }
 
     @Override
@@ -58,16 +63,22 @@ public class MainActivity extends Activity implements TextWatcher, AdapterView.O
         String to = spA.getSelectedItem().toString();
         if (value.length() > 0) {
             Double aux = Double.parseDouble(value.getText().toString());
-            Lunghezza f = Convert.getEnumLabel(from);
-            Lunghezza t = Convert.getEnumLabel(to);
-            aux = conv.convert(f, t, aux);
-            result.setText(df.format(aux));
+            switch (dim) {
+                case lung:
+                    Lunghezza f = Convert.getEnumLunghezza(from);
+                    Lunghezza t = Convert.getEnumLunghezza(to);
+                    result.setText(conv.convert(f, t, aux));
+                    break;
+                case pes:
+                    Peso fp = Convert.getEnumPeso(from);
+                    Peso tp = Convert.getEnumPeso(to);
+                    result.setText(conv.convert(fp,tp,aux));
+                    break;
+            }
             result.setVisibility(View.VISIBLE);
         } else
             result.setVisibility(View.INVISIBLE);
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,6 +102,25 @@ public class MainActivity extends Activity implements TextWatcher, AdapterView.O
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        //Toast.makeText(this, adapterView.getItemAtPosition(i).toString(), Toast.LENGTH_LONG).show();
+        if (adapterView.getItemAtPosition(i).toString().equals("peso") ||
+                adapterView.getItemAtPosition(i).toString().equals("lunghezza")
+                ) {
+            String _dim = ((TextView) view).getText().toString();
+            dim = Convert.getEnumDimensione(_dim);
+            String[] sa = new String[1];
+            switch (dim) {
+                case lung:
+                    sa = getResources().getStringArray(R.array.lista_lunghezza);
+                    break;
+                case pes:
+                    sa = getResources().getStringArray(R.array.lista_peso);
+                    break;
+            }
+            ArrayAdapter<String> data = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sa);
+            spDa.setAdapter(data);
+            spA.setAdapter(data);
+        }
         convert();
     }
 
