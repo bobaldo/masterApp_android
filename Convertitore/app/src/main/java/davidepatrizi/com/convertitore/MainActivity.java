@@ -14,7 +14,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends Activity implements TextWatcher, AdapterView.OnItemSelectedListener {
+    private DecimalFormat df;
     private Convert conv;
     private Spinner spDa;
     private Spinner spA;
@@ -34,6 +37,7 @@ public class MainActivity extends Activity implements TextWatcher, AdapterView.O
         spA.setOnItemSelectedListener(this);
         value.addTextChangedListener(this);
         conv = new Convert();
+        df = new DecimalFormat("####0.00");
     }
 
     @Override
@@ -52,32 +56,18 @@ public class MainActivity extends Activity implements TextWatcher, AdapterView.O
     private void convert() {
         String from = spDa.getSelectedItem().toString();
         String to = spA.getSelectedItem().toString();
-        //Log.w("Convertitore", "from " + from + " to " + to + " value " + value.getText().toString());
         if (value.length() > 0) {
             Double aux = Double.parseDouble(value.getText().toString());
-            Lunghezza f = getEnumLabel(from);
-            Lunghezza t = getEnumLabel(to);
+            Lunghezza f = Convert.getEnumLabel(from);
+            Lunghezza t = Convert.getEnumLabel(to);
             aux = conv.convert(f, t, aux);
-            result.setText(Double.toString(aux));
+            result.setText(df.format(aux));
             result.setVisibility(View.VISIBLE);
         } else
             result.setVisibility(View.INVISIBLE);
     }
 
-    private Lunghezza getEnumLabel(String label) {
-        if (label.equals("metro"))
-            return Lunghezza.mt;
-        else if (label.equals("centimetro"))
-            return Lunghezza.cm;
-        else if (label.equals("pollice"))
-            return Lunghezza.pll;
-        else if (label.equals("piede"))
-            return Lunghezza.pd;
-        else if (label.equals("iard"))
-            return Lunghezza.y;
-        else
-            return Lunghezza.mt;
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,8 +81,8 @@ public class MainActivity extends Activity implements TextWatcher, AdapterView.O
         int id = item.getItemId();
         if (id == R.id.convertAll) {
             Intent _int = new Intent(this, AllConvertActivity.class);
-            _int.putExtra("title", R.string.lunghezza);
-            _int.putExtra("value", value.getText().toString());
+            _int.putExtra("TITOLO", "Lunghezza");
+            _int.putExtra("VALORE", Double.parseDouble(value.getText().toString()));
             startActivity(_int);
             return true;
         }

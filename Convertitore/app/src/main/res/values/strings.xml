@@ -11,6 +11,7 @@
         <item>iard</item>
     </string-array>
 
-    <string name="title_activity_all_convert">AllConvertActivity</string>
+    <string name="title_activity_all_convert">Tulle le conversioni</string>
     <string name="convertAll">Converti in tutto</string>
+    <string name="prefixTitle">, conversioni per: </string>
 </resources>

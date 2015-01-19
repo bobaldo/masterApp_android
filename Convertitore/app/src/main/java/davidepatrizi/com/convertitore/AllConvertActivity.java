@@ -4,7 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
+import java.util.ArrayList;
 
 public class AllConvertActivity extends Activity {
 
@@ -12,6 +18,24 @@ public class AllConvertActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_convert);
+        Convert convertor = new Convert();
+
+        LinearLayout ll = (LinearLayout) findViewById(R.id.results);
+        TextView title = (TextView) findViewById(R.id.title);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            double value = extras.getDouble("VALORE");
+            title.setText(extras.getString("TITOLO") + title.getText() + " "  + Double.toString(value) + Lunghezza.mt );
+
+            String[] sa =  getResources().getStringArray(R.array.lista_lunghezza);
+
+            for(int i=1; i< sa.length; i++){
+                TextView tx = new TextView(this);
+                tx.setText(convertor.convertS(Lunghezza.mt, Convert.getEnumLabel(sa[i]), value) + " " + Convert.getEnumLabel(sa[i]));
+                tx.setTextSize(20);
+                ll.addView(tx);
+            }
+        }
     }
 
 
