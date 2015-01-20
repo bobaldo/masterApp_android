@@ -2,6 +2,11 @@
 <resources>
     <string name="app_name">Convertitore</string>
     <string name="lunghezza">LUNGHEZZA</string>
+    <string name="peso">PESO</string>
+    <string name="title_activity_all_convert">Tulle le conversioni</string>
+    <string name="convertAll">Converti in tutto</string>
+    <string name="prefixTitle">, conversioni per: </string>
+
     <string-array name="lista_lunghezza">
         <item>metro</item>
         <item>centimetro</item>
@@ -20,8 +25,4 @@
         <item>lunghezza</item>
         <item>peso</item>
     </string-array>
-
-    <string name="title_activity_all_convert">Tulle le conversioni</string>
-    <string name="convertAll">Converti in tutto</string>
-    <string name="prefixTitle">, conversioni per: </string>
 </resources>

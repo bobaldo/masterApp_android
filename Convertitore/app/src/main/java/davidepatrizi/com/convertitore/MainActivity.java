@@ -92,8 +92,8 @@ public class MainActivity extends Activity implements TextWatcher, AdapterView.O
         int id = item.getItemId();
         if (id == R.id.convertAll) {
             Intent _int = new Intent(this, AllConvertActivity.class);
-            _int.putExtra("TITOLO", "Lunghezza");
             _int.putExtra("VALORE", Double.parseDouble(value.getText().toString()));
+            _int.putExtra("DIMENSIONE", dim.toString());
             startActivity(_int);
             return true;
         }
@@ -117,7 +117,7 @@ public class MainActivity extends Activity implements TextWatcher, AdapterView.O
                     sa = getResources().getStringArray(R.array.lista_peso);
                     break;
             }
-            ArrayAdapter<String> data = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sa);
+            ArrayAdapter<String> data = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, sa);
             spDa.setAdapter(data);
             spA.setAdapter(data);
         }

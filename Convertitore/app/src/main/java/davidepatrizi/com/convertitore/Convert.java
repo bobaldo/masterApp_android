@@ -76,7 +76,7 @@ public class Convert {
                         convertor = 1.0;
                         break;
                     case g:
-                        convertor = 0.001;
+                        convertor = 1000.0;
                         break;
                     case l:
                         convertor = 2.20462262;
