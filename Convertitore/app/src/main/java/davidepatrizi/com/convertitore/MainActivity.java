@@ -106,20 +106,22 @@ public class MainActivity extends Activity implements TextWatcher, AdapterView.O
         if (adapterView.getItemAtPosition(i).toString().equals("peso") ||
                 adapterView.getItemAtPosition(i).toString().equals("lunghezza")
                 ) {
-            String _dim = ((TextView) view).getText().toString();
-            dim = Convert.getEnumDimensione(_dim);
-            String[] sa = new String[1];
-            switch (dim) {
-                case lung:
-                    sa = getResources().getStringArray(R.array.lista_lunghezza);
-                    break;
-                case pes:
-                    sa = getResources().getStringArray(R.array.lista_peso);
-                    break;
+            if (view != null) {
+                String _dim = ((TextView) view).getText().toString();
+                dim = Convert.getEnumDimensione(_dim);
+                String[] sa = new String[1];
+                switch (dim) {
+                    case lung:
+                        sa = getResources().getStringArray(R.array.lista_lunghezza);
+                        break;
+                    case pes:
+                        sa = getResources().getStringArray(R.array.lista_peso);
+                        break;
+                }
+                ArrayAdapter<String> data = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, sa);
+                spDa.setAdapter(data);
+                spA.setAdapter(data);
             }
-            ArrayAdapter<String> data = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, sa);
-            spDa.setAdapter(data);
-            spA.setAdapter(data);
         }
         convert();
     }
