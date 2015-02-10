@@ -7,18 +7,21 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
-public class MainActivity extends Activity implements TextWatcher, AdapterView.OnItemSelectedListener {
+public class MainActivity extends Activity implements TextWatcher, AdapterView.OnItemSelectedListener, View.OnClickListener {
     private Convert conv;
     private Spinner dimension;
     private Spinner spDa;
@@ -26,18 +29,21 @@ public class MainActivity extends Activity implements TextWatcher, AdapterView.O
     private EditText value;
     private TextView result;
     private Dimensione dim;
+    private Button btnDimensione;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        btnDimensione = (Button) findViewById(R.id.btnDimensione);
+        findViewById(R.id.btnDimensione).setOnClickListener(this);
         dim = Dimensione.lung;
-        dimension=(Spinner)findViewById(R.id.dimension);
-        spDa = (Spinner)findViewById(R.id.da);
-        spA = (Spinner)findViewById(R.id.a);
-        result = (TextView)findViewById(R.id.result);
-        value = (EditText)findViewById(R.id.toConvert);
+        dimension = (Spinner) findViewById(R.id.dimension);
+        spDa = (Spinner) findViewById(R.id.da);
+        spA = (Spinner) findViewById(R.id.a);
+        result = (TextView) findViewById(R.id.result);
+        value = (EditText) findViewById(R.id.toConvert);
         dimension.setOnItemSelectedListener(this);
         spDa.setOnItemSelectedListener(this);
         spA.setOnItemSelectedListener(this);
@@ -72,7 +78,7 @@ public class MainActivity extends Activity implements TextWatcher, AdapterView.O
                 case pes:
                     Peso fp = Convert.getEnumPeso(from);
                     Peso tp = Convert.getEnumPeso(to);
-                    result.setText(conv.convert(fp,tp,aux));
+                    result.setText(conv.convert(fp, tp, aux));
                     break;
             }
             result.setVisibility(View.VISIBLE);
@@ -128,5 +134,37 @@ public class MainActivity extends Activity implements TextWatcher, AdapterView.O
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnDimensione:
+                PopupMenu pm = new PopupMenu(this, view);
+                MenuInflater mi = pm.getMenuInflater();
+                mi.inflate(R.menu.menu_dimensione, pm.getMenu());
+                pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        btnDimensione.setText(item.getTitle().toString());
+                        dim = Convert.getEnumDimensione(item.getTitle().toString());
+                        String[] sa = new String[1];
+                        switch (dim) {
+                            case lung:
+                                sa = getResources().getStringArray(R.array.lista_lunghezza);
+                                break;
+                            case pes:
+                                sa = getResources().getStringArray(R.array.lista_peso);
+                                break;
+                        }
+                        //ArrayAdapter<String> data = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, sa);
+                        //spDa.setAdapter(data);
+                        //spA.setAdapter(data);
+                        return true;
+                    }
+                });
+                pm.show();
+                break;
+        }
     }
 }

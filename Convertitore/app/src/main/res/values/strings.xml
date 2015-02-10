@@ -6,6 +6,7 @@
     <string name="title_activity_all_convert">Tulle le conversioni</string>
     <string name="convertAll">Converti in tutto</string>
     <string name="prefixTitle">, conversioni per: </string>
+    <string name="dimensione">dimensione</string>
 
     <string-array name="lista_lunghezza">
         <item>metro</item>

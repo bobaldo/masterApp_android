@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Favorites</string>
+    <string name="action_new">Add page</string>
+    <string name="title_activity_page_display">PageDisplayActivity</string>
+    <string name="label">Label</string>
+    <string name="url">URL</string>
+
+</resources>

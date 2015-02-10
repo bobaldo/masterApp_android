@@ -12,6 +12,12 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lunghezza"
+            android:id="@+id/btnDimensione" />
+
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

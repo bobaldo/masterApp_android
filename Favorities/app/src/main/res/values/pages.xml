@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="labels">
+        <item>Android API reference</item>
+        <item>StackOverflow</item>
+        <item>Masterapp!</item>
+        <item>YouTube</item>
+    </string-array>
+    <string-array name="urls">
+        <item>http://developer.android.com/reference/packages.html</item>
+        <item>http://stackoverflow.com/</item>
+        <item>http://www.di.unipi.it/it/didattica/masterapp</item>
+        <item>https://www.youtube.com/watch?v=O9FHcW0yJPE</item>
+    </string-array>
+</resources>

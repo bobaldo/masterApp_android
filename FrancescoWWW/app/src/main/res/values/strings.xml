@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="urls">
+        <item>http://www.davidepatrizi.com/</item>
+        <item>http://www.youtube.com/</item>
+    </string-array>
+    <string name="app_name">FrancescoWWW</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+</resources>
