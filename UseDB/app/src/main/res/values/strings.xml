@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">UseDB</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="apri">APRI DB</string>
+    <string name="inserisciProdotto">INSERISCI PRODOTTO</string>
+    <string name="selezionaProdotto">SELEZIONA PRODOTTO</string>
+</resources>
