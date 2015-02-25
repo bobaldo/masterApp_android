@@ -49,10 +49,6 @@ public class GalleryAdapter extends BaseAdapter {
         return imageView;
     }
 
-    private String urlFor(int position) {
-        return "http://masterapp.di.unipi.it/img/slideshow/a" + (position + 1);
-    }
-
     private Drawable loadImageFromURL(String url) {
         try {
             InputStream is = (InputStream) new URL(url).getContent();
@@ -62,5 +58,9 @@ public class GalleryAdapter extends BaseAdapter {
             Toast.makeText(context, "Errore: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             return null;
         }
+    }
+
+    private String urlFor(int position) {
+        return "http://masterapp.di.unipi.it/img/slideshow/a" + (position + 1);
     }
 }

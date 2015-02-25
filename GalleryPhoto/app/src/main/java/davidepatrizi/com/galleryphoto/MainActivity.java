@@ -1,5 +1,6 @@
 package davidepatrizi.com.galleryphoto;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,17 +11,18 @@ import android.widget.Gallery;
 import android.widget.Toast;
 
 
-public class MainActivity extends ActionBarActivity implements Runnable {
+public class MainActivity extends ActionBarActivity {
     private Gallery gallery;
+    private Context ctx = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ctx = this;
         gallery = (Gallery) findViewById(R.id.gallery);
-        Runnable r = new ManageUrl();
-        Thread t = new Thread(r);
-        t.start();
+        gallery.setAdapter(new GalleryAdapter(ctx));
+
 
     }
 
@@ -55,10 +57,5 @@ public class MainActivity extends ActionBarActivity implements Runnable {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void run() {
-        gallery.setAdapter(new GalleryAdapter(this));
     }
 }
