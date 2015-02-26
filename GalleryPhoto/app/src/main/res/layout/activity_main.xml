@@ -13,4 +13,11 @@
         android:gravity="center"
         android:spacing="8dp" />
 
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/galleryMedia"
+        android:layout_alignParentStart="true" />
+
+
 </RelativeLayout>
