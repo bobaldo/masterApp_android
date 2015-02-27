@@ -26,21 +26,20 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ctx = this;
-        /*gallery = (Gallery) findViewById(R.id.gallery);
-        gallery.setAdapter(new GalleryAdapter(ctx));*/
+        gallery = (Gallery) findViewById(R.id.gallery);
+        gallery.setAdapter(new GalleryAdapter(ctx));
 
+        /*
         galleryMedia = (ListView) findViewById(R.id.galleryMedia);
-
         ContentResolver cr = getContentResolver();
         Uri uri = MediaStore.Images.Media.INTERNAL_CONTENT_URI;
         Cursor c = cr.query(uri,
-                null, /* colonne */
-                null, /* selezione */
-                null, /* args */
-                null /* sort */
+                null,
+                null,
+                null,
+                null
         );
-
-        galleryMedia.setAdapter(new MediaAdapter(this, c, uri));
+        galleryMedia.setAdapter(new MediaAdapter(this, c, uri));*/
     }
 
     @Override

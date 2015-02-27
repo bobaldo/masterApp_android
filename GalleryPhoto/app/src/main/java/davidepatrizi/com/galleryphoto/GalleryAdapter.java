@@ -2,6 +2,7 @@ package davidepatrizi.com.galleryphoto;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -43,21 +44,30 @@ public class GalleryAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
         ImageView imageView = new ImageView(context);
-        imageView.setImageDrawable(loadImageFromURL(urlFor(position)));
+        //imageView.setImageDrawable(loadImageFromURL(urlFor(position), imageView, context));
         imageView.setLayoutParams(new Gallery.LayoutParams(150, 150));
         imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        download(urlFor(position), imageView, context);
         return imageView;
     }
 
-    private Drawable loadImageFromURL(String url) {
-        try {
+    public void download(String url, ImageView imageView, Context context) {
+        DownloadImage task =
+                new DownloadImage(imageView, context);
+        task.execute(url);
+    }
+
+    private Drawable loadImageFromURL(String url, ImageView imageView, Context context) {
+        /*try {
             InputStream is = (InputStream) new URL(url).getContent();
             Drawable d = Drawable.createFromStream(is, "From " + url);
             return d;
         } catch (Exception e) {
             Toast.makeText(context, "Errore: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            return null;
+        */    return null; /*
         }
+        */
+
     }
 
     private String urlFor(int position) {
