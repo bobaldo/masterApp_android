@@ -10,6 +10,4 @@ public class DataDB implements BaseColumns {
     public final static String BSSID = "bsssid";
     public final static String SSID = "ssid";
     public final static String SIGNAL = "signal";
-    //public static String ID = "_id";
-    //public static String COUNT = "_count";
 }
