@@ -1,6 +1,20 @@
 <resources>
-    <string name="app_name">ScadenzarioAuto</string>
+    <string name="app_name">Scadenzario Auto</string>
 
-    <string name="hello_world">Hello world!</string>
+
     <string name="action_settings">Settings</string>
+
+    <string name="ita_action_add">Aggiungi nuovo mezzo</string>
+
+
+    <string-array name="ita_tipi">
+        <item>auto</item>
+        <item>moto</item>
+        <item>scooter</item>
+    </string-array>
+    <string name="ita_inserisci_targa">INSERISCI LA TARGA</string>
+    <string name="ita_seleziona_tipo">SELEZIONA IL TIPO</string>
+    <string name="ita_btnNewMezzo">aggiungi nuovo mezzo</string>
+    <string name="ita_aggiungi">aggiungi</string>
+    <string name="ita_cancella">cancella</string>
 </resources>

@@ -1,0 +1,20 @@
+MEZZO
+	_id
+	tipo
+	targa
+	visibile
+
+SCADENZA
+	_id
+	id_auto
+	assicurazione
+	bollo
+
+TAGLIANDO
+	_id
+	id_auto
+	data
+	spesa
+	note
+
+
