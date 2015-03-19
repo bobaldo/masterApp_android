@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Scadenzario Auto</string>
+    <string name="app_name">Scadenzario Veicoli</string>
     <string name="title_activity_mezzo">MezzoActivity</string>
     <string name="action_settings">Settings</string>
     <string name="ita_action_add">Aggiungi nuovo mezzo</string>
