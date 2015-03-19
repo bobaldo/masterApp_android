@@ -39,7 +39,6 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
             @Override
             protected void onPostExecute(Cursor cursor) {
                 try {
-
                     Toast.makeText(getActivity(), "id auto: " + cursor.getCount(), Toast.LENGTH_LONG).show();
                     cursor.moveToNext();
                     String targa = cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_TARGA));

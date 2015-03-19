@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
-    private AsyncTask<Void, Void, Cursor> asyncTaskTarghe;
     private static final int DIALOG_NEW = 1;
     private ListView listView;
     private final Context context = this;
@@ -61,7 +60,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void loadTarghe() {
-        asyncTaskTarghe = new AsyncTask<Void, Void, Cursor>() {
+        new AsyncTask<Void, Void, Cursor>() {
             @Override
             protected Cursor doInBackground(Void... voids) {
                 ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(context);
