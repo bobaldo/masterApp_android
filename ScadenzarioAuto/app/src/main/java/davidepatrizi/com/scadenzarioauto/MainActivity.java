@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -34,11 +35,14 @@ public class MainActivity extends ActionBarActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
                 try {
                     Cursor cursor = (Cursor) listView.getItemAtPosition(i);
                     int _id = cursor.getInt(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry._ID));
-                    //Toast.makeText(context, "id auto selezionato: " + _id, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(context, MezzoActivity.class);
+                    intent.putExtra(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, _id);
+                    startActivity(intent);
+
                 } catch (Exception ex) {
                     Toast.makeText(context, "Errore: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
