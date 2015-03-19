@@ -133,9 +133,4 @@ public class ScadenzarioAdapterDB {
                 null
         );
     }
-
-
-    public int getId(String targa) {
-        return 0;
-    }
 }

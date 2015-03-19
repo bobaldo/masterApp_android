@@ -14,33 +14,36 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
     private AsyncTask<Void, Void, Cursor> asyncTaskTarghe;
     private static final int DIALOG_NEW = 1;
     private ListView listView;
+    private final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Context context = this;
         listView = (ListView) findViewById(R.id.txtListaTarghe);
-        /*
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(context);
-                String targa = ((TextView) view.findViewById(android.R.id.text1)).getText().toString();
-                int _idTarga = saDB.getId(targa);
+
+                try {
+                    Cursor cursor = (Cursor) listView.getItemAtPosition(i);
+                    int _id = cursor.getInt(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry._ID));
+                    //Toast.makeText(context, "id auto selezionato: " + _id, Toast.LENGTH_SHORT).show();
+                } catch (Exception ex) {
+                    Toast.makeText(context, "Errore: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
-        */
 
         Button btnAggiungi = (Button) findViewById(R.id.btnAdd);
         btnAggiungi.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +57,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void loadTarghe() {
-        final Context context = this;
         asyncTaskTarghe = new AsyncTask<Void, Void, Cursor>() {
             @Override
             protected Cursor doInBackground(Void... voids) {
@@ -65,6 +67,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             protected void onPostExecute(Cursor cursor) {
                 try {
+                    /*
                     ListAdapter listAdapter = new SimpleCursorAdapter(
                             context,
                             android.R.layout.simple_list_item_2,
@@ -72,8 +75,8 @@ public class MainActivity extends ActionBarActivity {
                             new String[]{ScadenzarioDBEntry.COLUMN_NAME_TARGA, ScadenzarioDBEntry.COLUMN_NAME_TIPO},
                             new int[]{android.R.id.text1, android.R.id.text2},
                             0
-                    );
-                    listView.setAdapter(listAdapter);
+                    );*/
+                    listView.setAdapter(new AdapterListTarghe(context, cursor));
                 } catch (NullPointerException e) {
                     // se l'activity viene distrutta
                     ;
@@ -81,15 +84,6 @@ public class MainActivity extends ActionBarActivity {
             }
         }.execute();
     }
-
-    /*
-    @Override
-    public void onListItemClick(ListView listView, View view, int position, long id) {
-        ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(this);
-        String targa = ((TextView) view.findViewById(android.R.id.text1)).getText().toString();
-        int _idTarga = saDB.getId(targa);
-    }
-    */
 
     @Override
     protected void onPrepareDialog(int id, Dialog dialog) {
