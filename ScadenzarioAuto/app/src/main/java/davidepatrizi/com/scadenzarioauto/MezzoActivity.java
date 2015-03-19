@@ -18,7 +18,7 @@ public class MezzoActivity extends ActionBarActivity {
         if (extras != null) {
             _id_auto = extras.getInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO);
             if (savedInstanceState == null) {
-                showFragment(new ChooseFragment(), false);
+                showFragment(new ChooseFragment(), true);
             }
         } else {
             //debug line

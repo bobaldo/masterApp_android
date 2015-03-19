@@ -121,6 +121,19 @@ public class ScadenzarioAdapterDB {
         );
     }
 
+    public Cursor getMezzo(int _id) {
+        return db.query(false,
+                ScadenzarioDBEntry.TABLE_NAME_MEZZO,
+                new String[]{ScadenzarioDBEntry._ID, ScadenzarioDBEntry.COLUMN_NAME_TARGA, ScadenzarioDBEntry.COLUMN_NAME_TIPO},
+                ScadenzarioDBEntry._ID + " =? ",
+                new String[]{String.valueOf(_id)},
+                null,
+                null,
+                null,
+                null
+        );
+    }
+
     public Cursor getMezzo() {
         return db.query(false,
                 ScadenzarioDBEntry.TABLE_NAME_MEZZO,

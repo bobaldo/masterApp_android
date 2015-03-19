@@ -2,23 +2,22 @@
     <string name="app_name">Scadenzario Veicoli</string>
     <string name="title_activity_mezzo">MezzoActivity</string>
     <string name="action_settings">Settings</string>
-    <string name="ita_action_add">Aggiungi nuovo mezzo</string>
 
+    <string name="ita_action_add">Aggiungi nuovo mezzo</string>
     <string-array name="ita_tipi">
         <item>auto</item>
         <item>moto</item>
         <item>scooter</item>
     </string-array>
-    <string name="ita_inserisci_targa">INSERISCI LA TARGA</string>
-    <string name="ita_seleziona_tipo">SELEZIONA IL TIPO</string>
+    <string name="ita_inserisci_targa">inserisci la targa</string>
+    <string name="ita_seleziona_tipo">seleziona il tipo</string>
     <string name="ita_btnNewMezzo">aggiungi nuovo mezzo</string>
     <string name="ita_aggiungi">aggiungi</string>
     <string name="ita_cancella">cancella</string>
     <string name="ita_info">info</string>
     <string name="ita_scadenze">scadenze</string>
     <string name="ita_tagliandi">tagliandi</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="ita_targa">targa</string>
+    <string name="ita_tipo">tipo del mezzo</string>
+    <string name="ita_cancella_targa">cancella questa targa</string>
 </resources>
