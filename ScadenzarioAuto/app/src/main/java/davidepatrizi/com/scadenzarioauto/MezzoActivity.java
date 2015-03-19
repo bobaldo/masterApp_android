@@ -39,6 +39,7 @@ public class MezzoActivity extends ActionBarActivity {
     }
 
     private void showFragment(Fragment f, boolean withIdAuto){
+        //TODO: cambiare il titolo all'activity rispetto al fagment caricato
         if(withIdAuto) {
             Bundle arguments = new Bundle();
             arguments.putInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, _id_auto);

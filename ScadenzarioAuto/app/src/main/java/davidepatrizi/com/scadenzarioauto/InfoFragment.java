@@ -27,21 +27,28 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
         final View layout = inflater.inflate(R.layout.fragment_info, container, false);
         _id_auto = getArguments().getInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO);
         ((Button) layout.findViewById(R.id.btnElimina)).setOnClickListener(this);
-
+        Toast.makeText(getActivity(), "id auto: " + _id_auto, Toast.LENGTH_LONG).show();
         new AsyncTask<Void, Void, Cursor>() {
 
             @Override
             protected Cursor doInBackground(Void... voids) {
                 ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(getActivity());
-                return  saDB.getMezzo(_id_auto);
+                return saDB.getMezzo(_id_auto);
             }
 
             @Override
             protected void onPostExecute(Cursor cursor) {
-                String targa = cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_TARGA));
-                String tipo = cursor.getString((cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_TIPO)));
-                ((EditText) layout.findViewById(R.id.txtTarga)).setText(targa);
-                ((EditText) layout.findViewById(R.id.txtTipo)).setText(tipo);
+                try {
+
+                    Toast.makeText(getActivity(), "id auto: " + cursor.getCount(), Toast.LENGTH_LONG).show();
+                    cursor.moveToNext();
+                    String targa = cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_TARGA));
+                    String tipo = cursor.getString((cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_TIPO)));
+                    ((EditText) layout.findViewById(R.id.txtTarga)).setText(targa);
+                    ((EditText) layout.findViewById(R.id.txtTipo)).setText(tipo);
+                } catch (Exception ex) {
+                    Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         }.execute();
         return layout;
@@ -50,7 +57,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btnElimina) {
-            //TODO: dialog di alter con messaggio "se eliminata la targa sarà eliminato ogni dato ad essa associato, continuare?"
+            //TODO: dialog di alert con messaggio "se eliminata la targa sarà eliminato ogni dato ad essa associato, continuare?"
             try {
                 //elimino la targa
                 ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(getActivity());

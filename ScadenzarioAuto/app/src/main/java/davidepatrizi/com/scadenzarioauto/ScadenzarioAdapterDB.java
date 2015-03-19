@@ -31,11 +31,11 @@ public class ScadenzarioAdapterDB {
     public void deleteTarga(int id) {
         db.beginTransaction();
         db.delete(ScadenzarioDBEntry.TABLE_NAME_MEZZO,
-                ScadenzarioDBEntry._ID + "=?", new String[]{String.valueOf(id)});
+                ScadenzarioDBEntry._ID + " =? ", new String[]{String.valueOf(id)});
         db.delete(ScadenzarioDBEntry.TABLE_NAME_SCADENZA,
-                ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + "=?", new String[]{String.valueOf(id)});
+                ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + " =? ", new String[]{String.valueOf(id)});
         db.delete(ScadenzarioDBEntry.TABLE_NAME_TAGLIANDO,
-                ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + "=?", new String[]{String.valueOf(id)});
+                ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + " =? ", new String[]{String.valueOf(id)});
         db.setTransactionSuccessful();
         db.endTransaction();
     }
@@ -57,7 +57,7 @@ public class ScadenzarioAdapterDB {
         contentValues.put(ScadenzarioDBEntry.COLUMN_NAME_NOTE, note);
         db.update(ScadenzarioDBEntry.TABLE_NAME_TAGLIANDO,
                 contentValues,
-                ScadenzarioDBEntry._ID + "=?",
+                ScadenzarioDBEntry._ID + " =? ",
                 new String[]{String.valueOf(id)});
     }
 
@@ -78,7 +78,7 @@ public class ScadenzarioAdapterDB {
     private void insertScadenza(ContentValues cv, String scadenza, int id_auto) {
         db.update(ScadenzarioDBEntry.TABLE_NAME_SCADENZA,
                 cv,
-                ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + "=?",
+                ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + " =? ",
                 new String[]{String.valueOf(id_auto)});
     }
 
@@ -86,7 +86,7 @@ public class ScadenzarioAdapterDB {
         return db.query(false,
                 ScadenzarioDBEntry.TABLE_NAME_TAGLIANDO,
                 new String[]{ScadenzarioDBEntry._ID, ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, ScadenzarioDBEntry.COLUMN_NAME_DATA, ScadenzarioDBEntry.COLUMN_NAME_SPESA, ScadenzarioDBEntry.COLUMN_NAME_NOTE},
-                ScadenzarioDBEntry._ID + "=?",
+                ScadenzarioDBEntry._ID + " =? ",
                 new String[]{String.valueOf(id)},
                 null,
                 null,
@@ -99,7 +99,7 @@ public class ScadenzarioAdapterDB {
         return db.query(false,
                 ScadenzarioDBEntry.TABLE_NAME_TAGLIANDO,
                 new String[]{ScadenzarioDBEntry._ID, ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, ScadenzarioDBEntry.COLUMN_NAME_DATA, ScadenzarioDBEntry.COLUMN_NAME_SPESA, ScadenzarioDBEntry.COLUMN_NAME_NOTE},
-                ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + "=?",
+                ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + " =? ",
                 new String[]{String.valueOf(id_auto)},
                 null,
                 null,
@@ -112,7 +112,7 @@ public class ScadenzarioAdapterDB {
         return db.query(false,
                 ScadenzarioDBEntry.TABLE_NAME_SCADENZA,
                 new String[]{ScadenzarioDBEntry.COLUMN_NAME_ASSICURAZIONE, ScadenzarioDBEntry.COLUMN_NAME_BOLLO},
-                ScadenzarioDBEntry._ID + "=?",
+                ScadenzarioDBEntry._ID + " =? ",
                 new String[]{String.valueOf(id_auto)},
                 null,
                 null,
