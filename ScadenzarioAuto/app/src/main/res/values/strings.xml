@@ -30,5 +30,6 @@
     <string name="ita_scadenza_bollo">scadenza bollo</string>
     <string name="ita_avviso_assicurazione">attivo avviso assicurazione</string>
     <string name="ita_avviso_bollo">attivo avviso bollo</string>
+    <string name="ita_salva">salva</string>
     <string name="ita_message_elinazione_targa">se eliminata la targa, sarà eliminato ogni dato ad essa associata, continuare?</string>
 </resources>

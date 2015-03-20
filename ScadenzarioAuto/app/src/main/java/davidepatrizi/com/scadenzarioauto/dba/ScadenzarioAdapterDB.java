@@ -11,6 +11,7 @@ import java.sql.Timestamp;
  * Created by Bobaldo on 18/03/2015.
  */
 public class ScadenzarioAdapterDB {
+    //TODO: passare al paradigma Singleton
     private Context ctx;
     private SQLiteDatabase db;
 
@@ -75,6 +76,8 @@ public class ScadenzarioAdapterDB {
                 new String[]{String.valueOf(id_auto)});
     }
 
+    /*
+    //TODO: can be eliminated
     public void insertScadenzaBollo(int id_auto, Timestamp bollo) {
         String auxBollo = String.valueOf(bollo);
         ContentValues contentValues = new ContentValues();
@@ -95,6 +98,7 @@ public class ScadenzarioAdapterDB {
                 ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + " =? ",
                 new String[]{String.valueOf(id_auto)});
     }
+    */
 
     public Cursor getTagliando(int id) {
         return db.query(false,
@@ -130,7 +134,7 @@ public class ScadenzarioAdapterDB {
                         ScadenzarioDBEntry.COLUMN_NAME_ALLARMATA_BOLLO,
                         ScadenzarioDBEntry.COLUMN_NAME_ASSICURAZIONE,
                         ScadenzarioDBEntry.COLUMN_NAME_BOLLO},
-                ScadenzarioDBEntry._ID + " =? ",
+                ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + " =? ",
                 new String[]{String.valueOf(id_auto)},
                 null,
                 null,
