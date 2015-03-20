@@ -20,6 +20,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioAdapterDB;
+import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
+import davidepatrizi.com.scadenzarioauto.utility.Constant;
+
 public class MainActivity extends ActionBarActivity {
     private ListView listView;
     private final Context context = this;
@@ -77,7 +81,7 @@ public class MainActivity extends ActionBarActivity {
                             new int[]{android.R.id.text1, android.R.id.text2},
                             0
                     );*/
-                    listView.setAdapter(new AdapterListTarghe(context, cursor));
+                    listView.setAdapter(new ListTargheAdapter(context, cursor));
                 } catch (NullPointerException e) {
                     // se l'activity viene distrutta
                     ;

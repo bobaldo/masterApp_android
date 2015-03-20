@@ -1,4 +1,4 @@
-package davidepatrizi.com.scadenzarioauto;
+package davidepatrizi.com.scadenzarioauto.utility;
 
 /**
  * Created by Bobaldo on 20/03/2015.

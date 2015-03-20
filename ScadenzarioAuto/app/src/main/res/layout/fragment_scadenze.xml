@@ -14,9 +14,10 @@
         android:layout_marginLeft="@dimen/left_padding_30"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtScadenzaAssicurazione"
         android:inputType="date"
-        android:ems="10" />
+        android:ems="10"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/txtScadenzaAssicurazione" />
 
     <CheckBox
         android:layout_marginLeft="@dimen/left_padding_30"
@@ -38,6 +39,7 @@
         android:layout_height="wrap_content"
         android:inputType="date"
         android:ems="10"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/txtScadenzaBollo" />
 
     <CheckBox

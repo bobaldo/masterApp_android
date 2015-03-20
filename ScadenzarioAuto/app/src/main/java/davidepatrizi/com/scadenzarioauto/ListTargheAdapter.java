@@ -2,22 +2,19 @@ package davidepatrizi.com.scadenzarioauto;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.net.Uri;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.CursorAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
 
 /**
  * Created by Bobaldo on 26/02/2015.
  */
-public class AdapterListTarghe extends CursorAdapter {
-    public AdapterListTarghe(Context context, Cursor cursor) {
+public class ListTargheAdapter extends CursorAdapter {
+    public ListTargheAdapter(Context context, Cursor cursor) {
         super(context, cursor, 0);
     }
 

@@ -1,4 +1,4 @@
-package davidepatrizi.com.scadenzarioauto;
+package davidepatrizi.com.scadenzarioauto.fragment;
 
 
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import davidepatrizi.com.scadenzarioauto.MezzoActivity;
+import davidepatrizi.com.scadenzarioauto.R;
 
 public class ChooseFragment extends Fragment implements View.OnClickListener {
 

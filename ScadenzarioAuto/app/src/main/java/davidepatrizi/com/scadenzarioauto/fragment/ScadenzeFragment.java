@@ -1,4 +1,4 @@
-package davidepatrizi.com.scadenzarioauto;
+package davidepatrizi.com.scadenzarioauto.fragment;
 
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -10,6 +10,11 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import davidepatrizi.com.scadenzarioauto.MezzoActivity;
+import davidepatrizi.com.scadenzarioauto.R;
+import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioAdapterDB;
+import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
 
 /**
  * Created by Bobaldo on 19/03/2015.

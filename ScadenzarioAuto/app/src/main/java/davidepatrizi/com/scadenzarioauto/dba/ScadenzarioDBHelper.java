@@ -1,4 +1,4 @@
-package davidepatrizi.com.scadenzarioauto;
+package davidepatrizi.com.scadenzarioauto.dba;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -12,6 +12,14 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.widget.Toast;
 
+import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioAdapterDB;
+import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
+import davidepatrizi.com.scadenzarioauto.fragment.ChooseFragment;
+import davidepatrizi.com.scadenzarioauto.fragment.InfoFragment;
+import davidepatrizi.com.scadenzarioauto.fragment.ScadenzeFragment;
+import davidepatrizi.com.scadenzarioauto.fragment.TagliandiFragment;
+import davidepatrizi.com.scadenzarioauto.utility.Constant;
+
 public class MezzoActivity extends ActionBarActivity {
 
     private int _id_auto;
