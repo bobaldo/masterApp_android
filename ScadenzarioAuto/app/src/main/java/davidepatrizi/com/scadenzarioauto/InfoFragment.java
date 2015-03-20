@@ -15,19 +15,19 @@ import android.widget.Toast;
  * Created by Bobaldo on 19/03/2015.
  */
 public class InfoFragment extends Fragment implements View.OnClickListener {
+    private int _id_auto;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-    private int _id_auto;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View layout = inflater.inflate(R.layout.fragment_info, container, false);
         _id_auto = getArguments().getInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO);
         ((Button) layout.findViewById(R.id.btnElimina)).setOnClickListener(this);
-        Toast.makeText(getActivity(), "id auto: " + _id_auto, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(), "id auto: " + _id_auto, Toast.LENGTH_LONG).show(); //debug line
         new AsyncTask<Void, Void, Cursor>() {
 
             @Override
@@ -39,7 +39,6 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
             @Override
             protected void onPostExecute(Cursor cursor) {
                 try {
-                    Toast.makeText(getActivity(), "id auto: " + cursor.getCount(), Toast.LENGTH_LONG).show();
                     cursor.moveToNext();
                     String targa = cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_TARGA));
                     String tipo = cursor.getString((cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_TIPO)));
@@ -47,6 +46,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
                     ((EditText) layout.findViewById(R.id.txtTipo)).setText(tipo);
                 } catch (Exception ex) {
                     Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+                    ((MezzoActivity) getActivity()).goMainActivity();
                 }
             }
         }.execute();
@@ -61,10 +61,10 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
                 //elimino la targa
                 ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(getActivity());
                 saDB.deleteTarga(_id_auto);
+                ((MezzoActivity) getActivity()).goMainActivity();
             } catch (Exception ex) {
                 Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
             }
-            //TODO: ritorno alla MainActivity
         }
     }
 }
