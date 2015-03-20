@@ -25,7 +25,9 @@ public class ScadenzarioDBHelper extends SQLiteOpenHelper {
             ScadenzarioDBEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + " INTEGER, " +
             ScadenzarioDBEntry.COLUMN_NAME_ASSICURAZIONE + " TEXT, " +
-            ScadenzarioDBEntry.COLUMN_NAME_BOLLO + " TEXT " +
+            ScadenzarioDBEntry.COLUMN_NAME_BOLLO + " TEXT, " +
+            ScadenzarioDBEntry.COLUMN_NAME_ALLARMATA_ASSICURAZIONE + " BOOL, " +
+            ScadenzarioDBEntry.COLUMN_NAME_ALLARMATA_BOLLO + " BOOL " +
             ")";
 
     private final static String CREATE_TABLE_TAGLIANDO = "CREATE TABLE " + ScadenzarioDBEntry.TABLE_NAME_TAGLIANDO + " (" +

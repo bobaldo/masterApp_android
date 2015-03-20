@@ -4,13 +4,14 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:layout_marginLeft="@dimen/left_padding_15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/ita_targa" />
 
     <EditText
-        android:layout_marginLeft="@dimen/left_padding"
+        android:layout_marginLeft="@dimen/left_padding_30"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtTarga"
@@ -21,13 +22,14 @@
         android:focusableInTouchMode="false"/>
 
     <TextView
+        android:layout_marginLeft="@dimen/left_padding_15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/ita_tipo" />
 
     <EditText
-        android:layout_marginLeft="@dimen/left_padding"
+        android:layout_marginLeft="@dimen/left_padding_30"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtTipo"

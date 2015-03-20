@@ -4,25 +4,30 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:layout_marginLeft="@dimen/left_padding_15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/ita_scadenza_assicurazione" />
 
     <EditText
+        android:layout_marginLeft="@dimen/left_padding_30"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtScadenzaAssicurazione" />
+        android:id="@+id/txtScadenzaAssicurazione"
+        android:inputType="date"
+        android:ems="10" />
 
-    
 
     <TextView
+        android:layout_marginLeft="@dimen/left_padding_15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/ita_scadenza_bollo" />
 
     <EditText
+        android:layout_marginLeft="@dimen/left_padding_30"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="date"

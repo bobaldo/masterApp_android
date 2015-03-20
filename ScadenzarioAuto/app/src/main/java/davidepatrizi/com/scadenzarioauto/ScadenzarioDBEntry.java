@@ -15,6 +15,8 @@ public class ScadenzarioDBEntry implements BaseColumns {
     public final static String COLUMN_NAME_ID_AUTO = "id_auto";
     public final static String COLUMN_NAME_ASSICURAZIONE = "assicurazione";
     public final static String COLUMN_NAME_BOLLO = "bollo";
+    public final static String COLUMN_NAME_ALLARMATA_ASSICURAZIONE = "allarmata_assicurazione";
+    public final static String COLUMN_NAME_ALLARMATA_BOLLO = "allarmata_bollo";
     public final static String COLUMN_NAME_DATA = "data";
     public final static String COLUMN_NAME_SPESA = "spesa";
     public final static String COLUMN_NAME_NOTE = "note";
