@@ -1,11 +1,15 @@
 package davidepatrizi.com.scadenzarioauto;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.widget.Toast;
 
 public class MezzoActivity extends ActionBarActivity {
@@ -27,6 +31,34 @@ public class MezzoActivity extends ActionBarActivity {
             //debug line
             Toast.makeText(this, "ID_AUTO NON PASSATO", Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case Constant.DIALOG_NEW:
+                LayoutInflater factory = LayoutInflater.from(this);
+                return new AlertDialog.Builder(this)
+                        .setTitle(R.string.ita_eliminazione_targa)
+                        .setMessage(R.string.ita_message_elinazione_targa)
+                        .setPositiveButton(R.string.ita_confermo, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                try {
+                                    ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(getApplicationContext());
+                                    saDB.deleteTarga(_id_auto);
+                                    goMainActivity();
+                                } catch (Exception ex) {
+                                    Toast.makeText(getApplicationContext(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        })
+                        .setNegativeButton(R.string.ita_annulla, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                            }
+                        })
+                        .create();
+        }
+        return null;
     }
 
     public void showInfo() {

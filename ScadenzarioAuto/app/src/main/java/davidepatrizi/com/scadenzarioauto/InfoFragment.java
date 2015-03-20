@@ -56,15 +56,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btnElimina) {
-            //TODO: dialog di alert con messaggio "se eliminata la targa sarà eliminato ogni dato ad essa associato, continuare?"
-            try {
-                //elimino la targa
-                ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(getActivity());
-                saDB.deleteTarga(_id_auto);
-                ((MezzoActivity) getActivity()).goMainActivity();
-            } catch (Exception ex) {
-                Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
-            }
+            getActivity().showDialog(Constant.DIALOG_DELETE_CONFIRM);
         }
     }
 }

@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
-    private static final int DIALOG_NEW = 1;
     private ListView listView;
     private final Context context = this;
 
@@ -41,7 +40,6 @@ public class MainActivity extends ActionBarActivity {
                     Intent intent = new Intent(context, MezzoActivity.class);
                     intent.putExtra(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, _id);
                     startActivity(intent);
-
                 } catch (Exception ex) {
                     Toast.makeText(context, "Errore: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -52,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
         btnAggiungi.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View view) {
-                                               showDialog(DIALOG_NEW);
+                                               showDialog(Constant.DIALOG_NEW);
                                            }
                                        }
         );
@@ -97,7 +95,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
-            case DIALOG_NEW:
+            case Constant.DIALOG_NEW:
                 LayoutInflater factory = LayoutInflater.from(this);
                 return new AlertDialog.Builder(this)
                         .setTitle(R.string.ita_btnNewMezzo)
@@ -131,7 +129,7 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add_new:
-                showDialog(DIALOG_NEW);
+                showDialog(Constant.DIALOG_NEW);
                 break;
         }
         return super.onOptionsItemSelected(item);

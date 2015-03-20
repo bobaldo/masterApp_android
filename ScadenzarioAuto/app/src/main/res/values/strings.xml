@@ -22,5 +22,9 @@
     <string name="ita_tagliandi">tagliandi</string>
     <string name="ita_targa">targa</string>
     <string name="ita_tipo">tipo del mezzo</string>
-    <string name="ita_cancella_targa">cancella questa targa</string>
+    <string name="ita_cancella_targa">cancella questo mezzo</string>
+    <string name="ita_eliminazione_targa">eliminazione mezzo</string>
+    <string name="ita_confermo">confermo</string>
+    <string name="ita_annulla">annulla</string>
+    <string name="ita_message_elinazione_targa">se eliminata la targa, sarà eliminato ogni dato ad essa associata, continuare?</string>
 </resources>
