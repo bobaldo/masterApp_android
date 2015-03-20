@@ -41,7 +41,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
                 try {
                     cursor.moveToNext();
                     String targa = cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_TARGA));
-                    String tipo = cursor.getString((cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_TIPO)));
+                    String tipo = cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_TIPO));
                     ((EditText) layout.findViewById(R.id.txtTarga)).setText(targa);
                     ((EditText) layout.findViewById(R.id.txtTipo)).setText(tipo);
                 } catch (Exception ex) {

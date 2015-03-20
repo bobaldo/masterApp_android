@@ -125,7 +125,11 @@ public class ScadenzarioAdapterDB {
     public Cursor getScadenze(int id_auto) {
         return db.query(false,
                 ScadenzarioDBEntry.TABLE_NAME_SCADENZA,
-                new String[]{ScadenzarioDBEntry.COLUMN_NAME_ASSICURAZIONE, ScadenzarioDBEntry.COLUMN_NAME_BOLLO},
+                new String[]{
+                        ScadenzarioDBEntry.COLUMN_NAME_ALLARMATA_ASSICURAZIONE,
+                        ScadenzarioDBEntry.COLUMN_NAME_ALLARMATA_BOLLO,
+                        ScadenzarioDBEntry.COLUMN_NAME_ASSICURAZIONE,
+                        ScadenzarioDBEntry.COLUMN_NAME_BOLLO},
                 ScadenzarioDBEntry._ID + " =? ",
                 new String[]{String.valueOf(id_auto)},
                 null,
