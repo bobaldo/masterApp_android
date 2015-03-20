@@ -1,5 +1,6 @@
 package davidepatrizi.com.scadenzarioauto.fragment;
 
+import android.app.DialogFragment;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;

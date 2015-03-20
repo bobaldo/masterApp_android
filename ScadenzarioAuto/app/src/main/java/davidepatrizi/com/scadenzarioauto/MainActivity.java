@@ -54,7 +54,8 @@ public class MainActivity extends ActionBarActivity {
         btnAggiungi.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View view) {
-                                               showDialog(Constant.DIALOG_NEW);
+                                               showDialog(
+                                                       Constant.DIALOG_NEW);
                                            }
                                        }
         );
