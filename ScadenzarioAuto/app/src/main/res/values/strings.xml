@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Scadenzario Veicoli</string>
-    <string name="title_activity_mezzo">MezzoActivity</string>
+    <string name="title_activity_mezzo">Scadenzario Veicoli</string>
+    <string name="ita_title_show_info">info mezzo</string>
+    <string name="ita_title_show_tagliando">tagliandi mezzo</string>
+    <string name="ita_title_show_scadenza">scadenza mezzo</string>
     <string name="action_settings">Settings</string>
 
     <string name="ita_action_add">Aggiungi nuovo mezzo</string>

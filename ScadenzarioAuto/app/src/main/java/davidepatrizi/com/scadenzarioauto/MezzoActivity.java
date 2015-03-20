@@ -27,19 +27,21 @@ public class MezzoActivity extends ActionBarActivity {
     }
 
     public void showInfo() {
+        this.setTitle(R.string.ita_title_show_info);
         showFragment(new InfoFragment(),true);
     }
 
     public void showTagliandi() {
+        this.setTitle(R.string.ita_title_show_tagliando);
         showFragment(new TagliandiFragment(),true);
     }
 
     public void showScadenze() {
+        this.setTitle(R.string.ita_title_show_scadenza);
         showFragment(new ScadenzeFragment(),true);
     }
 
     private void showFragment(Fragment f, boolean withIdAuto){
-        //TODO: cambiare il titolo all'activity rispetto al fagment caricato
         if(withIdAuto) {
             Bundle arguments = new Bundle();
             arguments.putInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, _id_auto);
