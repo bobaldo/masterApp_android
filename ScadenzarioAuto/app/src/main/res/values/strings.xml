@@ -26,5 +26,7 @@
     <string name="ita_eliminazione_targa">eliminazione mezzo</string>
     <string name="ita_confermo">confermo</string>
     <string name="ita_annulla">annulla</string>
+    <string name="ita_scadenza_assicurazione">scadenza assicurazione</string>
+    <string name="ita_scadenza_bollo">ita_scadenza_bollo</string>
     <string name="ita_message_elinazione_targa">se eliminata la targa, sarà eliminato ogni dato ad essa associata, continuare?</string>
 </resources>
