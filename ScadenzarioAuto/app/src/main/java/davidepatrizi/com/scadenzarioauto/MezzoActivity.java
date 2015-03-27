@@ -43,9 +43,10 @@ public class MezzoActivity extends ActionBarActivity {
 
     @Override
     protected Dialog onCreateDialog(int id) {
+        LayoutInflater factory = null;
         switch (id) {
             case Constant.DIALOG_NEW:
-                LayoutInflater factory = LayoutInflater.from(this);
+                factory = LayoutInflater.from(this);
                 return new AlertDialog.Builder(this)
                         .setTitle(R.string.ita_eliminazione_targa)
                         .setMessage(R.string.ita_message_eliminazione_targa)
