@@ -2,6 +2,9 @@ package davidepatrizi.com.scadenzarioauto;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -68,6 +71,13 @@ public class MezzoActivity extends ActionBarActivity {
                         .create();
         }
         return null;
+    }
+
+    public void submitNotifica(Notification notification){
+        int id = 1;
+        NotificationManager nm =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        nm.notify(id, notification);
     }
 
     public void showInfo() {

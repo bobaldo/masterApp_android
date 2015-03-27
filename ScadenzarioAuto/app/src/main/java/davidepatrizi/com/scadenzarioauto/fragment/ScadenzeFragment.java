@@ -1,10 +1,13 @@
 package davidepatrizi.com.scadenzarioauto.fragment;
 
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -178,6 +181,18 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
                         } catch (ParseException ex) {
                             Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
                         }
+                    }
+
+                    if (txtAllarmaScadenzaAssicurazione.isChecked()) {
+                        //TODO: gestire la notifica delle notification nel tempo
+                        NotificationCompat.Builder builder =
+                                new NotificationCompat.Builder(getActivity())
+                                        .setSmallIcon(R.drawable.abc_btn_radio_material)
+                                        .setContentTitle("Daniel")
+                                        .setContentText("I went to the zoo and saw a monkey!");
+                        Notification n = builder.build();
+
+                        ((MezzoActivity) getActivity()).submitNotifica(n);
                     }
 
                     ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(getActivity());
