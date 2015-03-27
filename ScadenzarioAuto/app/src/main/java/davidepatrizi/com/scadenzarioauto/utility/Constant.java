@@ -5,5 +5,6 @@ package davidepatrizi.com.scadenzarioauto.utility;
  */
 public class Constant {
     public static final int DIALOG_NEW = 1;
-    public static final int DIALOG_DELETE_CONFIRM = 1;
+    public static final int DIALOG_DELETE_CONFIRM = 2;
+    public static final int REQUEST_CAMERA = 1;
 }

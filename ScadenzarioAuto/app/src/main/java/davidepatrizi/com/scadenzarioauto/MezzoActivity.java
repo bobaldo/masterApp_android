@@ -48,7 +48,7 @@ public class MezzoActivity extends ActionBarActivity {
                 LayoutInflater factory = LayoutInflater.from(this);
                 return new AlertDialog.Builder(this)
                         .setTitle(R.string.ita_eliminazione_targa)
-                        .setMessage(R.string.ita_message_elinazione_targa)
+                        .setMessage(R.string.ita_message_eliminazione_targa)
                         .setPositiveButton(R.string.ita_confermo, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 try {

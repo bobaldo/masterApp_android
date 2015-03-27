@@ -6,7 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,9 +26,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioAdapterDB;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
 import davidepatrizi.com.scadenzarioauto.utility.Constant;
+
+//import com.googlecode.tesseract.android.TessBaseAPI;
+//import com.venky.ocr.TextRecognizer;
 
 public class MainActivity extends ActionBarActivity {
     private ListView listView;
@@ -134,9 +147,129 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add_new:
-                showDialog(Constant.DIALOG_NEW);
+                //showDialog(Constant.DIALOG_NEW); //vecchia gestione
+
+                Intent vi = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (vi.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(vi, Constant.REQUEST_CAMERA);
+                }else{
+                    //TODO:capire se mettere dialog
+                    Toast.makeText(context, R.string.ita_message_camera_non_presente, Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int req, int res, Intent data) {
+        if (req == Constant.REQUEST_CAMERA && res == RESULT_OK) {
+          //  Uri video = data.getData();
+            // myVideoView.setVideoURI(video);
+            String targaTakenFromCamera = onPhotoTaken(data.getData());
+        }
+    }
+
+    protected String onPhotoTaken(Uri data) {
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 4;
+
+        Bitmap bitmap = BitmapFactory.decodeFile( data.toString(), options);
+
+        try {
+            ExifInterface exif = new ExifInterface(data.toString());
+            int exifOrientation = exif.getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL);
+
+            //Log.v(TAG, "Orient: " + exifOrientation);
+
+            int rotate = 0;
+
+            switch (exifOrientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotate = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotate = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotate = 270;
+                    break;
+            }
+
+            //Log.v(TAG, "Rotation: " + rotate);
+
+            if (rotate != 0) {
+                // Getting width & height of the given image.
+                int w = bitmap.getWidth();
+                int h = bitmap.getHeight();
+
+                // Setting pre rotate
+                Matrix mtx = new Matrix();
+                mtx.preRotate(rotate);
+
+                // Rotating Bitmap
+                bitmap = Bitmap.createBitmap(bitmap, 0, 0, w, h, mtx, false);
+            }
+
+            // Convert to ARGB_8888, required by tess
+            bitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true);
+
+        } catch (IOException ex) {
+            Toast.makeText(context, "Errore: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+        // _image.setImageBitmap( bitmap );
+        //Log.v(TAG, "Before baseApi");
+        //com.venky.ocr
+
+        /*try {
+
+
+            TextRecognizer t = new TextRecognizer();
+            File f = new File(data.toString());
+            StringBuffer targa = t.recognize(f);
+
+            ;
+        }catch (IOException ex){
+            Toast.makeText(context, "Errore: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        */
+        //1t.getLines(bitmap);
+
+        /*
+        TessBaseAPI baseApi = new TessBaseAPI();
+        baseApi.setDebug(true);
+        baseApi.init(DATA_PATH, lang);
+        baseApi.setImage(bitmap);
+
+        String recognizedText = baseApi.getUTF8Text();
+
+        baseApi.end();
+        baseApi = null;
+
+        */
+
+        // You now have the text in recognizedText var, you can do anything with it.
+        // We will display a stripped out trimmed alpha-numeric version of it (if lang is eng)
+        // so that garbage doesn't make it to the display.
+
+        //Log.v(TAG, "OCRED TEXT: " + recognizedText);
+
+        //if ( lang.equalsIgnoreCase("eng") ) {
+            //recognizedText = recognizedText.replaceAll("[^a-zA-Z0-9]+", " ");
+        //}
+
+        return "";// recognizedText.trim();
+
+        /*
+        if ( recognizedText.length() != 0 ) {
+            _field.setText(_field.getText().toString().length() == 0 ? recognizedText : _field.getText() + " " + recognizedText);
+            _field.setSelection(_field.getText().toString().length());
+*/        //}
+
+        // Cycle done.
     }
 }

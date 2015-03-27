@@ -28,4 +28,5 @@
         android:id="@+id/txtTipo"
         android:entries="@array/ita_tipi"
         android:layout_gravity="center_vertical" />
+
 </LinearLayout>
