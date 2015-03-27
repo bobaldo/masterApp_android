@@ -63,6 +63,14 @@ public class ScadenzarioAdapterDB {
     }
 
     public void insertScadenze(int id_auto, Timestamp bollo, Timestamp assicurazione, boolean allarmaBollo, boolean allarmaAssicurazione) {
+        Cursor cursor = getScadenze(id_auto);
+        if(!(cursor != null && cursor.getCount() > 0)){
+            //ramo che deve creare la tiga da aggiornare nella tabella scadenza
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, id_auto);
+            db.insert(ScadenzarioDBEntry.TABLE_NAME_SCADENZA, null, contentValues);
+        }
+
         String auxBollo = String.valueOf(bollo);
         String auxAssicurazione = String.valueOf(assicurazione);
         ContentValues contentValues = new ContentValues();
@@ -134,8 +142,8 @@ public class ScadenzarioAdapterDB {
                         ScadenzarioDBEntry.COLUMN_NAME_ALLARMATA_BOLLO,
                         ScadenzarioDBEntry.COLUMN_NAME_ASSICURAZIONE,
                         ScadenzarioDBEntry.COLUMN_NAME_BOLLO},
-                ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + " =? ",
-                new String[]{String.valueOf(id_auto)},
+                null,//ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + " =? ",
+                null,//new String[]{String.valueOf(id_auto)},
                 null,
                 null,
                 null,

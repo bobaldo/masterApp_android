@@ -54,14 +54,23 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
             @Override
             protected void onPostExecute(Cursor cursor) {
                 cursor.moveToNext();
-                //posso fare la getCount perchè so che ritorno sempre un elemento dal DB
+                //posso fare la getCount perchè so che ritorno sempre un solo elemento dal DB
                 if (cursor != null && cursor.getCount() > 0) {
                     try {
                         //TODO: gestire anche i valori allarme_assicurata e allarme bollo
+                        Boolean allarmaScadenzaAssicurazione = false;
+                        Boolean allarmaScadenzaBollo = false;
                         txtScadenzaAssicurazione.setText(cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_ASSICURAZIONE)));
                         txtScadenzaBollo.setText(cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_BOLLO)));
-                        txtAllarmaScadenzaAssicurazione.setChecked(Boolean.parseBoolean(cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_ALLARMATA_ASSICURAZIONE))));
-                        txtAllarmaScadenzaBollo.setChecked(Boolean.parseBoolean(cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_ALLARMATA_BOLLO))));
+                        if(cursor.getInt(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_ALLARMATA_ASSICURAZIONE)) == 1){
+                            allarmaScadenzaAssicurazione = true;
+                        }
+                        if(cursor.getInt(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_ALLARMATA_BOLLO))==1){
+                            allarmaScadenzaBollo = true;
+                        }
+
+                        txtAllarmaScadenzaAssicurazione.setChecked(allarmaScadenzaAssicurazione);
+                        txtAllarmaScadenzaBollo.setChecked(allarmaScadenzaBollo);
                     } catch (Exception ex) {
                         Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
                         ((MezzoActivity) getActivity()).goMainActivity();
