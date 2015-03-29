@@ -1,10 +1,8 @@
 package davidepatrizi.com.scadenzarioauto;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -48,7 +46,7 @@ public class MezzoActivity extends ActionBarActivity {
     protected Dialog onCreateDialog(int id) {
         LayoutInflater factory = null;
         switch (id) {
-            case Constant.DIALOG_NEW:
+            case Constant.DIALOG_DELETE_CONFIRM:
                 factory = LayoutInflater.from(this);
                 return new AlertDialog.Builder(this)
                         .setTitle(R.string.ita_eliminazione_targa)
@@ -73,12 +71,14 @@ public class MezzoActivity extends ActionBarActivity {
         return null;
     }
 
-    public void submitNotifica(Notification notification){
-        int id = 1;
-        NotificationManager nm =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.notify(id, notification);
+    /*
+    public void submitAlarm(Timestamp scadenza, int tipoAlarm, String _scadenza) {
+        alarm.setAlarm(this, tipoAlarm, _scadenza, "targa");
     }
+
+    public void cancelAlarm(int tipoAlarm, String _scadenza) {
+        alarm.cancelAlarm(this, tipoAlarm, _scadenza, "targa");
+    }*/
 
     public void showInfo() {
         isShowChoose = false;
@@ -134,4 +134,6 @@ public class MezzoActivity extends ActionBarActivity {
             return super.onKeyDown(keyCode, event);
         }
     }
+
+
 }

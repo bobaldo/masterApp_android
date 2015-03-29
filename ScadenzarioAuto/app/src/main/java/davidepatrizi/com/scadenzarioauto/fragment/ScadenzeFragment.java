@@ -2,7 +2,6 @@ package davidepatrizi.com.scadenzarioauto.fragment;
 
 import android.app.DatePickerDialog;
 import android.app.Notification;
-import android.app.NotificationManager;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +26,7 @@ import davidepatrizi.com.scadenzarioauto.MezzoActivity;
 import davidepatrizi.com.scadenzarioauto.R;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioAdapterDB;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
+import davidepatrizi.com.scadenzarioauto.utility.AlarmReceiver;
 import davidepatrizi.com.scadenzarioauto.utility.Constant;
 
 /**
@@ -43,6 +44,8 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
     private int mYearBol;
     private int mMonthBol;
     private int mDayBol;
+    private boolean onFireCheckedEvent = false;
+    private AlarmReceiver alarm;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,7 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
         mMonthBol = mMonthAss = calendar.get(Calendar.MONTH);
         mDayBol = mDayAss = calendar.get(Calendar.DAY_OF_MONTH);
         calendar = null;
+        alarm = new AlarmReceiver();
     }
 
     @Override
@@ -62,10 +66,42 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
         this.txtAllarmaScadenzaAssicurazione = (CheckBox) layout.findViewById(R.id.txtAllarmaScadenzaAssicurazione);
         this.txtAllarmaScadenzaBollo = (CheckBox) layout.findViewById(R.id.txtAllarmaScadenzaBollo);
         _id_auto = getArguments().getInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO);
-        ((Button) layout.findViewById(R.id.btnSalva)).setOnClickListener(this);
         ((Button) layout.findViewById(R.id.btnScadenzaAssicurazione)).setOnClickListener(this);
         ((Button) layout.findViewById(R.id.btnScadenzaBollo)).setOnClickListener(this);
-        //Toast.makeText(getActivity(), "id auto: " + _id_auto, Toast.LENGTH_LONG).show(); //debug line
+        txtAllarmaScadenzaBollo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (onFireCheckedEvent) {
+                    if (save()) {
+                        if (isChecked) {
+                            Toast.makeText(getActivity(), R.string.ita_avviso_bollo_attivato, Toast.LENGTH_LONG).show();
+                            //TODO: setta un timer + gestire la notifica delle notification nel tempo
+                        }
+                    }
+                }
+
+            }
+        });
+        txtAllarmaScadenzaAssicurazione.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (onFireCheckedEvent) {
+                    if (save()) {
+                        if (isChecked) {
+                            Toast.makeText(getActivity(), R.string.ita_avviso_assicurazione_attivato, Toast.LENGTH_LONG).show();
+                            //TODO: setta un timer + gestire la notifica delle notification nel tempo
+
+                            Timestamp ts = getTimeStamp(txtScadenzaAssicurazione.getText().toString());
+                            alarm.setAlarm(getActivity(), Constant.ALARM_SCADENZA_ASSICURAZIONE, txtScadenzaAssicurazione.getText().toString(), "TARGA");
+
+
+
+                        }else{
+                            alarm.cancelAlarm(getActivity(), Constant.ALARM_SCADENZA_ASSICURAZIONE, txtScadenzaAssicurazione.getText().toString(), "TARGA");
+                        }
+                    }
+                }
+            }
+        });
+
         new AsyncTask<Void, Void, Cursor>() {
             @Override
             protected Cursor doInBackground(Void... voids) {
@@ -93,6 +129,7 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
 
                         txtAllarmaScadenzaAssicurazione.setChecked(allarmaScadenzaAssicurazione);
                         txtAllarmaScadenzaBollo.setChecked(allarmaScadenzaBollo);
+                        onFireCheckedEvent = true;
                     } catch (Exception ex) {
                         Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
                         ((MezzoActivity) getActivity()).goMainActivity();
@@ -114,7 +151,7 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
                     mYearAss = year;
                     mMonthAss = monthOfYear;
                     mDayAss = dayOfMonth;
-                    updateDisplay(mYearAss, mMonthAss, mDayAss, txtScadenzaAssicurazione);
+                    updateDisplay(mYearAss, mMonthAss, mDayAss, txtScadenzaAssicurazione, true);
                 }
             };
 
@@ -124,28 +161,36 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
                     mYearBol = year;
                     mMonthBol = monthOfYear;
                     mDayBol = dayOfMonth;
-                    updateDisplay(mYearBol, mMonthBol, mDayBol, txtScadenzaBollo);
+                    updateDisplay(mYearBol, mMonthBol, mDayBol, txtScadenzaBollo, true);
                 }
             };
 
     public void updateDisplay(String date, TextView textView) {
-        try {
-            Date _date = (Date) Constant.formatterYYYYMMDD.parse(date);
-            Calendar c = Calendar.getInstance();
-            c.setTime(_date);
-            updateDisplay(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), textView);
-        } catch (ParseException ex) {
-            Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
-            ((MezzoActivity) getActivity()).goMainActivity();
+        if (!date.isEmpty() && date != null) {
+            try {
+                Date _date = (Date) Constant.formatterYYYYMMDD.parse(date);
+                Calendar c = Calendar.getInstance();
+                c.setTime(_date);
+                updateDisplay(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), textView, false);
+            } catch (ParseException ex) {
+                Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+                ((MezzoActivity) getActivity()).goMainActivity();
+            }
         }
     }
 
-    public void updateDisplay(int year, int month, int day, TextView textView) {
+    public void updateDisplay(int year, int month, int day, TextView textView, boolean doSave) {
         textView.setText(
                 new StringBuilder()
                         .append(day).append("-")
                         .append(month + 1).append("-")
                         .append(year).append(" "));
+        if (doSave) {
+            if (save()) {
+                //TODO: Toast di avviso salvataggio ok che discrimina sul textView
+                //Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     @Override
@@ -156,53 +201,52 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
         } else if (view.getId() == R.id.btnScadenzaBollo) {
             DataSetterFragment dsf = new DataSetterFragment(getActivity(), mDateSetListenerBollo, mYearBol, mMonthBol, mDayBol);
             dsf.show();
-        } else if (view.getId() == R.id.btnSalva) {
-            //salva i dati nel DB
-            new AsyncTask<Void, Void, Void>() {
-                @Override
-                protected Void doInBackground(Void... voids) {
-                    Timestamp assicurazione = new Timestamp(System.currentTimeMillis());
-                    Timestamp bollo = new Timestamp(System.currentTimeMillis());
-                    String timeAss = txtScadenzaAssicurazione.getText().toString();
-                    String timeBol = txtScadenzaBollo.getText().toString();
-                    if (timeAss != null) {
-                        try {
-                            Date date = (Date) Constant.formatterDDMMYYYY.parse(timeAss);
-                            assicurazione.setTime(date.getTime());
-                        } catch (ParseException ex) {
-                            Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    }
-
-                    if (timeBol != null) {
-                        try {
-                            Date date = (Date) Constant.formatterDDMMYYYY.parse(timeBol);
-                            bollo.setTime(date.getTime());
-                        } catch (ParseException ex) {
-                            Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    }
-
-                    if (txtAllarmaScadenzaAssicurazione.isChecked()) {
-                        //TODO: gestire la notifica delle notification nel tempo
-                        NotificationCompat.Builder builder =
-                                new NotificationCompat.Builder(getActivity())
-                                        .setSmallIcon(R.drawable.abc_btn_radio_material)
-                                        .setContentTitle("Daniel")
-                                        .setContentText("I went to the zoo and saw a monkey!");
-                        Notification n = builder.build();
-
-                        ((MezzoActivity) getActivity()).submitNotifica(n);
-                    }
-
-                    ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(getActivity());
-                    saDB.insertScadenze(_id_auto, bollo, assicurazione, txtAllarmaScadenzaBollo.isChecked(), txtAllarmaScadenzaAssicurazione.isChecked());
-                    return null;
-                }
-            }.execute();
-            //TODO: setta un timer
-            //esci dal fragment
-            ((MezzoActivity) getActivity()).showChoose();
         }
+    }
+
+    public boolean save() {
+        boolean ret = true;
+        try {
+            Timestamp assicurazione = new Timestamp(System.currentTimeMillis());
+            Timestamp bollo = new Timestamp(System.currentTimeMillis());
+            String timeAss = txtScadenzaAssicurazione.getText().toString();
+            String timeBol = txtScadenzaBollo.getText().toString();
+            if (timeAss != null) {
+                try {
+                    Date date = (Date) Constant.formatterDDMMYYYY.parse(timeAss);
+                    assicurazione.setTime(date.getTime());
+                } catch (ParseException ex) {
+                    Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+                    ret = false;
+                }
+            }
+
+            if (timeBol != null) {
+                try {
+                    Date date = (Date) Constant.formatterDDMMYYYY.parse(timeBol);
+                    bollo.setTime(date.getTime());
+                } catch (ParseException ex) {
+                    Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+                    ret = false;
+                }
+            }
+
+            ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(getActivity());
+            saDB.insertScadenze(_id_auto, bollo, assicurazione, txtAllarmaScadenzaBollo.isChecked(), txtAllarmaScadenzaAssicurazione.isChecked());
+        } catch (Exception ex) {
+            ret = false;
+        }
+        return ret;
+    }
+
+    private Timestamp getTimeStamp(String date) {
+        Timestamp ret = new Timestamp(System.currentTimeMillis());
+        try {
+            Date d = (Date) Constant.formatterDDMMYYYY.parse(date);
+            ret.setTime(d.getTime());
+        } catch (ParseException ex) {
+            //Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        return ret;
     }
 }

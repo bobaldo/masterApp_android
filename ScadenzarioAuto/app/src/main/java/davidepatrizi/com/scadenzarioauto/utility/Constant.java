@@ -12,4 +12,9 @@ public class Constant {
     public static final int DIALOG_NEW = 1;
     public static final int DIALOG_DELETE_CONFIRM = 2;
     public static final int REQUEST_CAMERA = 3;
+    public static final int ALARM_SCADENZA_ASSICURAZIONE = 1;
+    public static final int ALARM_SCADENZA_BOLLO = 2;
+    public static final String TIPO_ALARM = "tipo_alarm";
+    public static final String SCADENZA = "scadenza";
+    public static final String TARGA = "targa";
 }

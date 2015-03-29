@@ -29,8 +29,11 @@
     <string name="ita_scadenza_assicurazione">scadenza assicurazione</string>
     <string name="ita_scadenza_bollo">scadenza bollo</string>
     <string name="ita_avviso_assicurazione">attivo avviso assicurazione</string>
+    <string name="ita_avviso_assicurazione_attivato">avviso assicurazione attivato</string>
     <string name="ita_avviso_bollo">attivo avviso bollo</string>
+    <string name="ita_avviso_bollo_attivato">avviso bollo attivato</string>
     <string name="ita_salva">salva</string>
     <string name="ita_message_eliminazione_targa">se eliminata la targa, sarà eliminato ogni dato ad essa associata, continuare?</string>
     <string name="ita_message_camera_non_presente">camera non presente nel dispositvo</string>
+    <string name="ita_notifica_assicurazione">la tua assicurazione sulla targa %s scade il $s</string>
 </resources>
