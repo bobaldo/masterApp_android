@@ -5,23 +5,36 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Date;
 
 import davidepatrizi.com.scadenzarioauto.R;
+import davidepatrizi.com.scadenzarioauto.utility.Constant;
+import davidepatrizi.com.scadenzarioauto.utility.DataSetterFragment;
 
-public class ItemTagliandoActivity extends ActionBarActivity {
+public class ItemTagliandoActivity extends ActionBarActivity implements View.OnClickListener {
     private int mYear;
     private int mMonth;
     private int mDay;
+    private Button btnManageItem;
+    private int _id_auto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_tagliando);
-
+        //TODO: recuperare l'id_auto
+        btnManageItem = ((Button) findViewById(R.id.btnManageItem));
+        btnManageItem.setOnClickListener(this);
+        ((Button) findViewById(R.id.btnDataTagliando)).setOnClickListener(this);
         Calendar calendar = Calendar.getInstance();
         mYear = calendar.get(Calendar.YEAR);
         mMonth = calendar.get(Calendar.MONTH);
@@ -69,35 +82,41 @@ public void onClick(View view) {
 
     }
 
-
-    /*protected android.app.DatePickerDialog.OnDateSetListener mDateSetListenerDataSpesa =
+    protected android.app.DatePickerDialog.OnDateSetListener mDateSetListenerDataSpesa =
             new DatePickerDialog.OnDateSetListener() {
                 public void onDateSet(DatePicker view, int year, int month, int day) {
                     mYear = year;
                     mMonth = month;
                     mDay = day;
-                    ((TextView) alertDialogItemTagliando.findViewById(R.id.txtDataTagliando)).setText(
+                    ((TextView) findViewById(R.id.txtDataTagliando)).setText(
                             new StringBuilder()
                                     .append(day).append("-")
                                     .append(month + 1).append("-")
                                     .append(year).append(" "));
                 }
             };
-            */
-
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void onClick(View view) {
+        if (view.getId() == R.id.btnDataTagliando) {
+            DataSetterFragment dsf = new DataSetterFragment(this, mDateSetListenerDataSpesa, mYear, mMonth, mDay);
+            dsf.show();
+        } else if (view.getId() == R.id.btnManageItem) {
+            //TODO: salva e chiudi
+            try {
+                String _dataTagliando = ((TextView) findViewById(R.id.txtDataTagliando)).getText().toString();
+                float spesaTagliando = Float.parseFloat(((EditText) findViewById(R.id.txtSpesaTagliando)).getText().toString());
+                String note = ((EditText) findViewById(R.id.txtNote)).getText().toString();
+                Timestamp dataTagliando = new Timestamp(System.currentTimeMillis());
+                Date date = (Date) Constant.formatterDDMMYYYY.parse(_dataTagliando);
+                dataTagliando.setTime(date.getTime());
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+                ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(this);
+                saDB.insertTagliando(_id_auto, dataTagliando, spesaTagliando, note);
+                finish();
+            }catch (ParseException ex){
+
+            }
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }
