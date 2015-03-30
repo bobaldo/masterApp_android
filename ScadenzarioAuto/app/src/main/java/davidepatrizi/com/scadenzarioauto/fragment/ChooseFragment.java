@@ -35,11 +35,11 @@ public class ChooseFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.btnScadenze:
-                ((MezzoActivity) getActivity()).showScadenze();
+                ((MezzoActivity) getActivity()).showScadenza();
                 break;
 
             case R.id.btnTagliandi:
-                ((MezzoActivity) getActivity()).showTagliandi();
+                ((MezzoActivity) getActivity()).showTagliando();
                 break;
         }
     }

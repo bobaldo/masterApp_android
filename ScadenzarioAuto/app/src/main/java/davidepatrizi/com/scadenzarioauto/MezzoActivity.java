@@ -1,6 +1,5 @@
 package davidepatrizi.com.scadenzarioauto;
 
-import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -36,7 +35,7 @@ public class MezzoActivity extends ActionBarActivity {
             _id_auto = extras.getInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO);
             _targa = extras.getString(ScadenzarioDBEntry.COLUMN_NAME_TARGA);
             if (savedInstanceState == null) {
-                showChoose();
+                showMenuFragment();
             }
         } else {
             //debug line
@@ -79,19 +78,19 @@ public class MezzoActivity extends ActionBarActivity {
         showFragment(new InfoFragment(), true);
     }
 
-    public void showTagliandi() {
+    public void showTagliando() {
         isShowChoose = false;
         this.setTitle(getString(R.string.ita_title_show_tagliando) + " " + _targa.toUpperCase());
         showFragment(new TagliandiFragment(), true);
     }
 
-    public void showScadenze() {
+    public void showScadenza() {
         isShowChoose = false;
         this.setTitle(getString(R.string.ita_title_show_scadenza) + " " + _targa.toUpperCase());
         showFragment(new ScadenzeFragment(), true);
     }
 
-    public void showChoose() {
+    public void showMenuFragment() {
         isShowChoose = true;
         this.setTitle(getString(R.string.title_activity_mezzo) + " " + _targa.toUpperCase());
         showFragment(new ChooseFragment(), true);
@@ -128,6 +127,4 @@ public class MezzoActivity extends ActionBarActivity {
             return super.onKeyDown(keyCode, event);
         }
     }
-
-
 }

@@ -26,16 +26,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioAdapterDB;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
 import davidepatrizi.com.scadenzarioauto.utility.Constant;
-
-//import com.googlecode.tesseract.android.TessBaseAPI;
-//import com.venky.ocr.TextRecognizer;
 
 public class MainActivity extends ActionBarActivity {
     private ListView listView;
@@ -87,19 +82,8 @@ public class MainActivity extends ActionBarActivity {
             @Override
             protected void onPostExecute(Cursor cursor) {
                 try {
-                    /*
-                    ListAdapter listAdapter = new SimpleCursorAdapter(
-                            context,
-                            android.R.layout.simple_list_item_2,
-                            cursor,
-                            new String[]{ScadenzarioDBEntry.COLUMN_NAME_TARGA, ScadenzarioDBEntry.COLUMN_NAME_TIPO},
-                            new int[]{android.R.id.text1, android.R.id.text2},
-                            0
-                    );*/
                     listView.setAdapter(new ListTargheAdapter(context, cursor));
                 } catch (NullPointerException e) {
-                    // se l'activity viene distrutta
-                    ;
                 }
             }
         }.execute();
@@ -149,7 +133,6 @@ public class MainActivity extends ActionBarActivity {
         switch (item.getItemId()) {
             case R.id.action_add_new:
                 //showDialog(Constant.DIALOG_NEW); //vecchia gestione
-
                 Intent vi = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (vi.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(vi, Constant.REQUEST_CAMERA);
@@ -172,7 +155,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     protected String onPhotoTaken(Uri data) {
-
+        //TODO: gestione ocr
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 4;
 
