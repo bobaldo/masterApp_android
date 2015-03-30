@@ -38,6 +38,7 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
     private CheckBox txtAllarmaScadenzaAssicurazione;
     private CheckBox txtAllarmaScadenzaBollo;
     private int _id_auto;
+    private String _targa;
     private int mYearAss;
     private int mMonthAss;
     private int mDayAss;
@@ -66,6 +67,7 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
         this.txtAllarmaScadenzaAssicurazione = (CheckBox) layout.findViewById(R.id.txtAllarmaScadenzaAssicurazione);
         this.txtAllarmaScadenzaBollo = (CheckBox) layout.findViewById(R.id.txtAllarmaScadenzaBollo);
         _id_auto = getArguments().getInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO);
+        _targa = getArguments().getString(ScadenzarioDBEntry.COLUMN_NAME_TARGA);
         ((Button) layout.findViewById(R.id.btnScadenzaAssicurazione)).setOnClickListener(this);
         ((Button) layout.findViewById(R.id.btnScadenzaBollo)).setOnClickListener(this);
         txtAllarmaScadenzaBollo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -86,16 +88,11 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
                 if (onFireCheckedEvent) {
                     if (save()) {
                         if (isChecked) {
+                            //setta un alarm
+                            alarm.setAlarm(getActivity(), Constant.ALARM_SCADENZA_ASSICURAZIONE, txtScadenzaAssicurazione.getText().toString(), _targa);
                             Toast.makeText(getActivity(), R.string.ita_avviso_assicurazione_attivato, Toast.LENGTH_LONG).show();
-                            //TODO: setta un timer + gestire la notifica delle notification nel tempo
-
-                            Timestamp ts = getTimeStamp(txtScadenzaAssicurazione.getText().toString());
-                            alarm.setAlarm(getActivity(), Constant.ALARM_SCADENZA_ASSICURAZIONE, txtScadenzaAssicurazione.getText().toString(), "TARGA");
-
-
-
                         }else{
-                            alarm.cancelAlarm(getActivity(), Constant.ALARM_SCADENZA_ASSICURAZIONE, txtScadenzaAssicurazione.getText().toString(), "TARGA");
+                            alarm.cancelAlarm(getActivity(), Constant.ALARM_SCADENZA_ASSICURAZIONE, txtScadenzaAssicurazione.getText().toString(), _targa);
                         }
                     }
                 }

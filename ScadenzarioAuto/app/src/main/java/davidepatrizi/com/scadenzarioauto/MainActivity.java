@@ -53,9 +53,10 @@ public class MainActivity extends ActionBarActivity {
                 try {
                     Cursor cursor = (Cursor) listView.getItemAtPosition(i);
                     int _id = cursor.getInt(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry._ID));
-
+                    String _targa = cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_TARGA));
                     Intent intent = new Intent(context, MezzoActivity.class);
                     intent.putExtra(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, _id);
+                    intent.putExtra(ScadenzarioDBEntry.COLUMN_NAME_TARGA, _targa);
                     startActivity(intent);
                 } catch (Exception ex) {
                     Toast.makeText(context, "Errore: " + ex.getMessage(), Toast.LENGTH_SHORT).show();

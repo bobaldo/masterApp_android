@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Scadenzario Veicoli</string>
-    <string name="title_activity_mezzo">Scadenzario Veicoli</string>
-    <string name="ita_title_show_info">info mezzo</string>
-    <string name="ita_title_show_tagliando">tagliandi mezzo</string>
-    <string name="ita_title_show_scadenza">scadenza mezzo</string>
+    <string name="title_activity_mezzo">scadenzario per</string>
+    <string name="ita_title_show_info">info per</string>
+    <string name="ita_title_show_tagliando">tagliandi per</string>
+    <string name="ita_title_show_scadenza">scadenza per</string>
     <string name="action_settings">Settings</string>
 
     <string name="ita_action_add">Aggiungi nuovo mezzo</string>
@@ -35,5 +35,5 @@
     <string name="ita_salva">salva</string>
     <string name="ita_message_eliminazione_targa">se eliminata la targa, sarà eliminato ogni dato ad essa associata, continuare?</string>
     <string name="ita_message_camera_non_presente">camera non presente nel dispositvo</string>
-    <string name="ita_notifica_assicurazione">la tua assicurazione sulla targa %s scade il $s</string>
+    <!--string name="ita_notifica_assicurazione">la tua assicurazione sulla targa %s scade il %s</string-->
 </resources>

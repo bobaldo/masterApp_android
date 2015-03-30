@@ -24,6 +24,7 @@ import davidepatrizi.com.scadenzarioauto.utility.Constant;
 public class MezzoActivity extends ActionBarActivity {
 
     private int _id_auto;
+    private String _targa;
     private boolean isShowChoose = false;
 
     @Override
@@ -33,6 +34,7 @@ public class MezzoActivity extends ActionBarActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             _id_auto = extras.getInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO);
+            _targa = extras.getString(ScadenzarioDBEntry.COLUMN_NAME_TARGA);
             if (savedInstanceState == null) {
                 showChoose();
             }
@@ -82,25 +84,25 @@ public class MezzoActivity extends ActionBarActivity {
 
     public void showInfo() {
         isShowChoose = false;
-        this.setTitle(R.string.ita_title_show_info);
+        this.setTitle(getString(R.string.ita_title_show_info) + " " + _targa.toUpperCase());
         showFragment(new InfoFragment(), true);
     }
 
     public void showTagliandi() {
         isShowChoose = false;
-        this.setTitle(R.string.ita_title_show_tagliando);
+        this.setTitle(getString(R.string.ita_title_show_tagliando) + " " + _targa.toUpperCase());
         showFragment(new TagliandiFragment(), true);
     }
 
     public void showScadenze() {
         isShowChoose = false;
-        this.setTitle(R.string.ita_title_show_scadenza);
+        this.setTitle(getString(R.string.ita_title_show_scadenza) + " " + _targa.toUpperCase());
         showFragment(new ScadenzeFragment(), true);
     }
 
     public void showChoose() {
         isShowChoose = true;
-        this.setTitle(R.string.title_activity_mezzo);
+        this.setTitle(getString(R.string.title_activity_mezzo) + " " + _targa.toUpperCase());
         showFragment(new ChooseFragment(), true);
     }
 
@@ -108,6 +110,7 @@ public class MezzoActivity extends ActionBarActivity {
         if (withIdAuto) {
             Bundle arguments = new Bundle();
             arguments.putInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, _id_auto);
+            arguments.putString(ScadenzarioDBEntry.COLUMN_NAME_TARGA, _targa);
             f.setArguments(arguments);
         }
 
