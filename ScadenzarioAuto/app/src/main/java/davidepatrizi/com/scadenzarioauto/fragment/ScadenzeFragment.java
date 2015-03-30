@@ -26,6 +26,7 @@ import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioAdapterDB;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
 import davidepatrizi.com.scadenzarioauto.utility.AlarmReceiver;
 import davidepatrizi.com.scadenzarioauto.utility.Constant;
+import davidepatrizi.com.scadenzarioauto.utility.DataSetterFragment;
 
 /**
  * Created by Bobaldo on 19/03/2015.

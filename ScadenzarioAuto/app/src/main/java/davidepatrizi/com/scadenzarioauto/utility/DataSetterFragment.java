@@ -1,4 +1,4 @@
-package davidepatrizi.com.scadenzarioauto.fragment;
+package davidepatrizi.com.scadenzarioauto.utility;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
