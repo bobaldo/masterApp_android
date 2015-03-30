@@ -73,15 +73,6 @@ public class MezzoActivity extends ActionBarActivity {
         return null;
     }
 
-    /*
-    public void submitAlarm(Timestamp scadenza, int tipoAlarm, String _scadenza) {
-        alarm.setAlarm(this, tipoAlarm, _scadenza, "targa");
-    }
-
-    public void cancelAlarm(int tipoAlarm, String _scadenza) {
-        alarm.cancelAlarm(this, tipoAlarm, _scadenza, "targa");
-    }*/
-
     public void showInfo() {
         isShowChoose = false;
         this.setTitle(getString(R.string.ita_title_show_info) + " " + _targa.toUpperCase());

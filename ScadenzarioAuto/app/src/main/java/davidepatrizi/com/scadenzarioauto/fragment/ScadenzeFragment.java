@@ -1,12 +1,10 @@
 package davidepatrizi.com.scadenzarioauto.fragment;
 
 import android.app.DatePickerDialog;
-import android.app.Notification;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,12 +73,14 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
                 if (onFireCheckedEvent) {
                     if (save()) {
                         if (isChecked) {
+                            //setta un alarm
+                            alarm.setAlarm(getActivity(), Constant.ALARM_SCADENZA_BOLLO, txtScadenzaBollo.getText().toString(), _targa);
                             Toast.makeText(getActivity(), R.string.ita_avviso_bollo_attivato, Toast.LENGTH_LONG).show();
-                            //TODO: setta un timer + gestire la notifica delle notification nel tempo
+                        } else {
+                            alarm.cancelAlarm(getActivity(), Constant.ALARM_SCADENZA_BOLLO, txtAllarmaScadenzaBollo.getText().toString(), _targa);
                         }
                     }
                 }
-
             }
         });
         txtAllarmaScadenzaAssicurazione.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -91,7 +91,7 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
                             //setta un alarm
                             alarm.setAlarm(getActivity(), Constant.ALARM_SCADENZA_ASSICURAZIONE, txtScadenzaAssicurazione.getText().toString(), _targa);
                             Toast.makeText(getActivity(), R.string.ita_avviso_assicurazione_attivato, Toast.LENGTH_LONG).show();
-                        }else{
+                        } else {
                             alarm.cancelAlarm(getActivity(), Constant.ALARM_SCADENZA_ASSICURAZIONE, txtScadenzaAssicurazione.getText().toString(), _targa);
                         }
                     }
@@ -232,17 +232,6 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
             saDB.insertScadenze(_id_auto, bollo, assicurazione, txtAllarmaScadenzaBollo.isChecked(), txtAllarmaScadenzaAssicurazione.isChecked());
         } catch (Exception ex) {
             ret = false;
-        }
-        return ret;
-    }
-
-    private Timestamp getTimeStamp(String date) {
-        Timestamp ret = new Timestamp(System.currentTimeMillis());
-        try {
-            Date d = (Date) Constant.formatterDDMMYYYY.parse(date);
-            ret.setTime(d.getTime());
-        } catch (ParseException ex) {
-            //Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
         return ret;
     }

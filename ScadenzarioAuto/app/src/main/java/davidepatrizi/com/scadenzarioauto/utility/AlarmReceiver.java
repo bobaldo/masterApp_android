@@ -14,6 +14,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import davidepatrizi.com.scadenzarioauto.R;
 
@@ -26,8 +27,9 @@ public class AlarmReceiver extends BroadcastReceiver {
     private PendingIntent pendingIntentAssicurazione;
     private Notification notification = null;
     private NotificationCompat.Builder builder = null;
+    private NotificationManager nm = null;
 
-    public AlarmReceiver(){
+    public AlarmReceiver() {
     }
 
     @Override
@@ -52,30 +54,36 @@ public class AlarmReceiver extends BroadcastReceiver {
                             .setSmallIcon(R.drawable.abc_btn_radio_material)
                             .setContentTitle(res.getString(R.string.ita_scadenza_assicurazione))
                             .setColor(Color.RED)
-                            .setContentText(String.format(aux, targa, scadenza));
+                            .setContentText(String.format(aux, targa.toUpperCase(), scadenza));
                     notification = builder.build();
-                    NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                    nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                     nm.notify(Constant.NOTIFICA_SCADENZA_ASSICURAZIONE, notification);
                     Log.w("PD: ", "notifica send: ");
                     break;
                 case Constant.ALARM_SCADENZA_BOLLO:
-                    /*builder =new NotificationCompat.Builder(this)
+                    builder = new NotificationCompat.Builder(context)
+                            //TODO: inserire mia icona app
                             .setSmallIcon(R.drawable.abc_btn_radio_material)
-                            .setContentTitle("Scadenza Assicurazione")
-                            .setContentText("Il tuo bollo scade il %s");
-                    notification = builder.build();*/
+                            .setContentTitle(res.getString(R.string.ita_scadenza_bollo))
+                            .setColor(Color.RED)
+                            .setContentText(String.format(aux, targa.toUpperCase(), scadenza));
+                    notification = builder.build();
+                    nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                    nm.notify(Constant.NOTIFICA_SCADENZA_BOLLO, notification);
                     break;
             }
         }
     }
 
     public void setAlarm(Context context, int tipoAlarm, String _scadenza, String targa) {
-        //TODO: settare il tempo del calendar rispetto alla scadenza 1 mese prima
+        //ASSUNZIONE: l'alert viene inviato il mese prima della scadenza intorno alle 10:10
         Calendar calendar = Calendar.getInstance();
-        //calendar.setTime(new Date(_scadenza));
+        calendar.setTime(new Date(_scadenza));
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 9);
-        calendar.set(Calendar.MINUTE, 24);
+        calendar.set(Calendar.HOUR_OF_DAY, 10);
+        calendar.set(Calendar.MINUTE, 10);
+        int month = calendar.get(Calendar.MONTH);
+        calendar.set(Calendar.MONTH, month - 1);
 
         Log.w("PD", "scadenza: " + calendar.getTime().toString());
         intentAssicurazione = new Intent(context, AlarmReceiver.class);
