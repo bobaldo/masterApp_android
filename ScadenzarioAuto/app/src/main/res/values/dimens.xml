@@ -4,4 +4,5 @@
     <dimen name="activity_mezzo_minMeasure">150dp</dimen>
     <dimen name="left_padding_30">30dp</dimen>
     <dimen name="left_padding_15">15dp</dimen>
+    <dimen name="top_padding_30">30dp</dimen>
 </resources>

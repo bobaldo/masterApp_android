@@ -1,7 +1,9 @@
 package davidepatrizi.com.scadenzarioauto;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -10,7 +12,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioAdapterDB;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
@@ -19,9 +28,9 @@ import davidepatrizi.com.scadenzarioauto.fragment.InfoFragment;
 import davidepatrizi.com.scadenzarioauto.fragment.ScadenzeFragment;
 import davidepatrizi.com.scadenzarioauto.fragment.TagliandiFragment;
 import davidepatrizi.com.scadenzarioauto.utility.Constant;
+import davidepatrizi.com.scadenzarioauto.utility.DataSetterFragment;
 
 public class MezzoActivity extends ActionBarActivity {
-
     private int _id_auto;
     private String _targa;
     private boolean isShowChoose = false;
@@ -45,10 +54,8 @@ public class MezzoActivity extends ActionBarActivity {
 
     @Override
     protected Dialog onCreateDialog(int id) {
-        LayoutInflater factory = null;
         switch (id) {
             case Constant.DIALOG_DELETE_CONFIRM:
-                factory = LayoutInflater.from(this);
                 return new AlertDialog.Builder(this)
                         .setTitle(R.string.ita_eliminazione_targa)
                         .setMessage(R.string.ita_message_eliminazione_targa)

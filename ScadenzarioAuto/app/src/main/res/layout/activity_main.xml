@@ -7,12 +7,12 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/ita_action_add"
+        android:text="@string/ita_action_add_mezzo"
         android:id="@+id/btnAdd"
         android:layout_gravity="center_horizontal" />
 
     <ListView
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="@dimen/top_padding_30"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtListaTarghe"

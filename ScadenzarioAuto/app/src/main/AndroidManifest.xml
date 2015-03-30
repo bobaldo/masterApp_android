@@ -20,7 +20,13 @@
             android:name=".MezzoActivity"
             android:label="@string/title_activity_mezzo" >
         </activity>
-        <receiver android:name=".utility.AlarmReceiver"/>
+
+        <receiver android:name=".utility.AlarmReceiver" />
+
+        <activity
+            android:name=".dba.ItemTagliandoActivity"
+            android:label="@string/title_activity_item_tagliando" >
+        </activity>
     </application>
 
 </manifest>

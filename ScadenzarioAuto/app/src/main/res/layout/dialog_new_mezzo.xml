@@ -6,8 +6,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/ita_inserisci_targa"
-        android:id="@+id/textView" />
+        android:text="@string/ita_inserisci_targa"/>
 
     <EditText
         android:layout_width="fill_parent"
@@ -28,5 +27,4 @@
         android:id="@+id/txtTipo"
         android:entries="@array/ita_tipi"
         android:layout_gravity="center_vertical" />
-
 </LinearLayout>

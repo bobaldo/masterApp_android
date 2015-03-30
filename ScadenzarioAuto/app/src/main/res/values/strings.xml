@@ -6,15 +6,20 @@
     <string name="ita_title_show_scadenza">scadenza per</string>
     <string name="action_settings">Settings</string>
 
-    <string name="ita_action_add">Aggiungi nuovo mezzo</string>
+    <string name="ita_action_add_mezzo">Aggiungi nuovo mezzo</string>
+    <string name="ita_action_add_tagliando">Aggiungi nuovo tagliando</string>
     <string-array name="ita_tipi">
         <item>auto</item>
         <item>moto</item>
         <item>scooter</item>
     </string-array>
+    <string name="ita_note">note</string>
+    <string name="ita_spesa_tagliando">spesa tagliando</string>
+    <string name="ita_selezionata_targa">targa selezionata</string>
     <string name="ita_inserisci_targa">inserisci la targa</string>
     <string name="ita_seleziona_tipo">seleziona il tipo</string>
     <string name="ita_btnNewMezzo">aggiungi nuovo mezzo</string>
+    <string name="ita_btnNewTagliando">aggiungi nuovo tagliando</string>
     <string name="ita_aggiungi">aggiungi</string>
     <string name="ita_cancella">cancella</string>
     <string name="ita_info">info</string>
@@ -35,5 +40,8 @@
     <string name="ita_salva">salva</string>
     <string name="ita_message_eliminazione_targa">se eliminata la targa, sarà eliminato ogni dato ad essa associata, continuare?</string>
     <string name="ita_message_camera_non_presente">camera non presente nel dispositvo</string>
+    <string name="title_activity_item_tagliando">ItemTagliandoActivity</string>
+
+    <string name="hello_world">Hello world!</string>
     <!--string name="ita_notifica_assicurazione">la tua assicurazione sulla targa %s scade il %s</string-->
 </resources>

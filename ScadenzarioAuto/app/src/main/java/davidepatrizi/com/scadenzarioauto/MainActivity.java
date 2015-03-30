@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity {
                                            @Override
                                            public void onClick(View view) {
                                                showDialog(
-                                                       Constant.DIALOG_NEW);
+                                                       Constant.DIALOG_NEW_MEZZO);
                                            }
                                        }
         );
@@ -98,11 +98,11 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
-            case Constant.DIALOG_NEW:
+            case Constant.DIALOG_NEW_MEZZO:
                 LayoutInflater factory = LayoutInflater.from(this);
                 return new AlertDialog.Builder(this)
                         .setTitle(R.string.ita_btnNewMezzo)
-                        .setView(factory.inflate(R.layout.dialog_new, null))
+                        .setView(factory.inflate(R.layout.dialog_new_mezzo, null))
                         .setPositiveButton(R.string.ita_aggiungi, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 String targa = ((TextView)((AlertDialog)dialog).findViewById(R.id.txtTarga)).getText().toString();
