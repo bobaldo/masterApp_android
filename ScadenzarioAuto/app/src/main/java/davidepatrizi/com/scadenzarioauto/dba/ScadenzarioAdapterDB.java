@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.sql.Timestamp;
 
@@ -65,7 +66,7 @@ public class ScadenzarioAdapterDB {
     public void insertScadenze(int id_auto, Timestamp bollo, Timestamp assicurazione, boolean allarmaBollo, boolean allarmaAssicurazione) {
         Cursor cursor = getScadenze(id_auto);
         if(!(cursor != null && cursor.getCount() > 0)){
-            //ramo che deve creare la tiga da aggiornare nella tabella scadenza
+            //ramo che deve creare la riga da aggiornare nella tabella scadenza
             ContentValues contentValues = new ContentValues();
             contentValues.put(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, id_auto);
             db.insert(ScadenzarioDBEntry.TABLE_NAME_SCADENZA, null, contentValues);
@@ -124,12 +125,16 @@ public class ScadenzarioAdapterDB {
     public Cursor getTagliandi(int id_auto) {
         return db.query(false,
                 ScadenzarioDBEntry.TABLE_NAME_TAGLIANDO,
-                new String[]{ScadenzarioDBEntry._ID, ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, ScadenzarioDBEntry.COLUMN_NAME_DATA, ScadenzarioDBEntry.COLUMN_NAME_SPESA, ScadenzarioDBEntry.COLUMN_NAME_NOTE},
-                ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + " =? ",
-                new String[]{String.valueOf(id_auto)},
+                new String[]{ScadenzarioDBEntry._ID,
+                        ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO,
+                        ScadenzarioDBEntry.COLUMN_NAME_DATA,
+                        ScadenzarioDBEntry.COLUMN_NAME_SPESA,
+                        ScadenzarioDBEntry.COLUMN_NAME_NOTE},
+                null,//ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + " =? ",
+                null,//new String[]{String.valueOf(id_auto)},
                 null,
                 null,
-                ScadenzarioDBEntry.COLUMN_NAME_DATA,
+                null,//ScadenzarioDBEntry.COLUMN_NAME_DATA,
                 null
         );
     }

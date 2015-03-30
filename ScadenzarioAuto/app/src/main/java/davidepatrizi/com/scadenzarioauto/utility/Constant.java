@@ -20,5 +20,5 @@ public class Constant {
     public static final String TIPO_ALARM = "tipo_alarm";
     public static final String SCADENZA = "scadenza";
     public static final String TARGA = "targa";
-
+    public static final String IS_NEW = "is_new";
 }

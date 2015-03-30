@@ -38,10 +38,11 @@
     <string name="ita_avviso_bollo">attivo avviso bollo</string>
     <string name="ita_avviso_bollo_attivato">avviso bollo attivato</string>
     <string name="ita_salva">salva</string>
+    <string name="ita_message_data_errata">data errata</string>
     <string name="ita_message_eliminazione_targa">se eliminata la targa, sarà eliminato ogni dato ad essa associata, continuare?</string>
     <string name="ita_message_camera_non_presente">camera non presente nel dispositvo</string>
     <string name="title_activity_item_tagliando">ItemTagliandoActivity</string>
-
-    <string name="hello_world">Hello world!</string>
+    <string name="ita_aggungi_tagliando_per">aggiungi tagliando per</string>
+    <string name="ita_modifica_tagliando_per">modifica tagliando per</string>
     <!--string name="ita_notifica_assicurazione">la tua assicurazione sulla targa %s scade il %s</string-->
 </resources>

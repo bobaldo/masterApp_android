@@ -1,11 +1,11 @@
 package davidepatrizi.com.scadenzarioauto.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import davidepatrizi.com.scadenzarioauto.R;
+import davidepatrizi.com.scadenzarioauto.ItemTagliandoActivity;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioAdapterDB;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
 import davidepatrizi.com.scadenzarioauto.utility.Constant;
@@ -53,7 +54,7 @@ public class TagliandiFragment extends Fragment implements View.OnClickListener 
             @Override
             protected Cursor doInBackground(Void... params) {
                 try {
-                    ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(context);
+                    ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(getActivity());
                     return saDB.getTagliandi(_id_auto);
                 } catch (NullPointerException e) { // se l'activity viene distrutta
                     return null;
@@ -62,18 +63,20 @@ public class TagliandiFragment extends Fragment implements View.OnClickListener 
 
             @Override
             protected void onPostExecute(Cursor cursor) {
-                try {
-                    // costruisce l'adapter per la lista
-                    ListAdapter listAdapter = new SimpleCursorAdapter(
-                            getActivity(),
-                            android.R.layout.simple_list_item_1,
-                            cursor,
-                            new String[]{ScadenzarioDBEntry._ID + " " + ScadenzarioDBEntry.COLUMN_NAME_DATA},
-                            new int[]{android.R.id.text1},
-                            0
-                    );
-                    txtListaTagliandi.setAdapter(listAdapter);
-                } catch (NullPointerException e) {
+                if (cursor != null && cursor.getCount() > 0) {
+                    try {
+                        // costruisce l'adapter per la lista
+                        ListAdapter listAdapter = new SimpleCursorAdapter(
+                                getActivity(),
+                                android.R.layout.simple_list_item_2,
+                                cursor,
+                                new String[]{ScadenzarioDBEntry.COLUMN_NAME_NOTE, ScadenzarioDBEntry.COLUMN_NAME_DATA },
+                                new int[]{android.R.id.text1, android.R.id.text2},
+                                0
+                        );
+                        txtListaTagliandi.setAdapter(listAdapter);
+                    } catch (NullPointerException e) {
+                    }
                 }
             }
         }.execute();
@@ -83,6 +86,11 @@ public class TagliandiFragment extends Fragment implements View.OnClickListener 
     public void onClick(View view) {
         if (view.getId() == R.id.btnAdd) {
             //TODO: aprire nuova activity
+            Intent intent = new Intent(getActivity(), ItemTagliandoActivity.class);
+            intent.putExtra(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, _id_auto);
+            intent.putExtra(ScadenzarioDBEntry.COLUMN_NAME_TARGA, _targa);
+            intent.putExtra(Constant.IS_NEW, true);
+            startActivity(intent);
             //getActivity().showDialog(Constant.DIALOG_NEW_TAGLIANDO);
         }
     }

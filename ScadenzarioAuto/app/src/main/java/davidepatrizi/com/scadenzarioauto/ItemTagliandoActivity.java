@@ -1,4 +1,4 @@
-package davidepatrizi.com.scadenzarioauto.dba;
+package davidepatrizi.com.scadenzarioauto;
 
 import android.app.DatePickerDialog;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
@@ -17,6 +18,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import davidepatrizi.com.scadenzarioauto.R;
+import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioAdapterDB;
+import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
 import davidepatrizi.com.scadenzarioauto.utility.Constant;
 import davidepatrizi.com.scadenzarioauto.utility.DataSetterFragment;
 
@@ -26,21 +29,36 @@ public class ItemTagliandoActivity extends ActionBarActivity implements View.OnC
     private int mDay;
     private Button btnManageItem;
     private int _id_auto;
+    private String _targa;
+    private boolean _isNew;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_tagliando);
         //TODO: recuperare l'id_auto
-        btnManageItem = ((Button) findViewById(R.id.btnManageItem));
-        btnManageItem.setOnClickListener(this);
-        ((Button) findViewById(R.id.btnDataTagliando)).setOnClickListener(this);
-        Calendar calendar = Calendar.getInstance();
-        mYear = calendar.get(Calendar.YEAR);
-        mMonth = calendar.get(Calendar.MONTH);
-        mDay = calendar.get(Calendar.DAY_OF_MONTH);
-        calendar = null;
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            _id_auto = extras.getInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO);
+            _targa = extras.getString(ScadenzarioDBEntry.COLUMN_NAME_TARGA);
+            _isNew = extras.getBoolean(Constant.IS_NEW);
 
+            ((EditText) findViewById(R.id.txtTarga)).setText(_targa);
+            btnManageItem = ((Button) findViewById(R.id.btnManageItem));
+            btnManageItem.setText(R.string.ita_salva);
+            btnManageItem.setOnClickListener(this);
+            ((Button) findViewById(R.id.btnDataTagliando)).setOnClickListener(this);
+            if (_isNew) {
+                setTitle(getString(R.string.ita_aggungi_tagliando_per) + " " + _targa);
+            } else {
+                setTitle(getString(R.string.ita_modifica_tagliando_per) + " " + _targa);
+            }
+            Calendar calendar = Calendar.getInstance();
+            mYear = calendar.get(Calendar.YEAR);
+            mMonth = calendar.get(Calendar.MONTH);
+            mDay = calendar.get(Calendar.DAY_OF_MONTH);
+            calendar = null;
+        }
         /*
         * switch (id) {
             case Constant.DIALOG_NEW_TAGLIANDO:
@@ -114,8 +132,10 @@ public void onClick(View view) {
                 ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(this);
                 saDB.insertTagliando(_id_auto, dataTagliando, spesaTagliando, note);
                 finish();
-            }catch (ParseException ex){
-
+            } catch (ParseException ex) {
+                Toast.makeText(this, "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+            }catch (Exception ex){
+                Toast.makeText(this, R.string.ita_message_data_errata, Toast.LENGTH_LONG).show();
             }
         }
     }
