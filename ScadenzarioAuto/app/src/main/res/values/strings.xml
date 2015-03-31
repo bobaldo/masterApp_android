@@ -13,7 +13,7 @@
         <item>moto</item>
         <item>scooter</item>
     </string-array>
-    <string name="ita_note">note</string>
+    <string name="ita_note">descrizione</string>
     <string name="ita_spesa_tagliando">spesa tagliando</string>
     <string name="ita_selezionata_targa">targa selezionata</string>
     <string name="ita_inserisci_targa">inserisci la targa</string>

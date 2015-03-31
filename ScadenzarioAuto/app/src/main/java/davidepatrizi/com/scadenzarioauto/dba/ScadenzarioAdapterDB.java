@@ -112,7 +112,11 @@ public class ScadenzarioAdapterDB {
     public Cursor getTagliando(int id) {
         return db.query(false,
                 ScadenzarioDBEntry.TABLE_NAME_TAGLIANDO,
-                new String[]{ScadenzarioDBEntry._ID, ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, ScadenzarioDBEntry.COLUMN_NAME_DATA, ScadenzarioDBEntry.COLUMN_NAME_SPESA, ScadenzarioDBEntry.COLUMN_NAME_NOTE},
+                new String[]{ScadenzarioDBEntry._ID,
+                        ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO,
+                        ScadenzarioDBEntry.COLUMN_NAME_DATA,
+                        ScadenzarioDBEntry.COLUMN_NAME_SPESA,
+                        ScadenzarioDBEntry.COLUMN_NAME_NOTE},
                 ScadenzarioDBEntry._ID + " =? ",
                 new String[]{String.valueOf(id)},
                 null,
@@ -123,6 +127,7 @@ public class ScadenzarioAdapterDB {
     }
 
     public Cursor getTagliandi(int id_auto) {
+        //TODO: invertire l'ordine per data
         return db.query(false,
                 ScadenzarioDBEntry.TABLE_NAME_TAGLIANDO,
                 new String[]{ScadenzarioDBEntry._ID,

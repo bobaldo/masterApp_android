@@ -82,7 +82,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             protected void onPostExecute(Cursor cursor) {
                 try {
-                    listView.setAdapter(new ListTargheAdapter(context, cursor));
+                    listView.setAdapter(new ListTargaAdapter(context, cursor));
                 } catch (NullPointerException e) {
                 }
             }

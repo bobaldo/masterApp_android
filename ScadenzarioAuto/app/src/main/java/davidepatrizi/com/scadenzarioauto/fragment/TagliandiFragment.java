@@ -11,10 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
+import davidepatrizi.com.scadenzarioauto.ListTagliandoAdapter;
 import davidepatrizi.com.scadenzarioauto.R;
 import davidepatrizi.com.scadenzarioauto.ItemTagliandoActivity;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioAdapterDB;
@@ -27,7 +27,6 @@ import davidepatrizi.com.scadenzarioauto.utility.Constant;
 public class TagliandiFragment extends Fragment implements View.OnClickListener {
     private int _id_auto;
     private String _targa;
-    private final Context context = getActivity();
     private ListView txtListaTagliandi;
 
     @Override
@@ -38,7 +37,15 @@ public class TagliandiFragment extends Fragment implements View.OnClickListener 
         this.txtListaTagliandi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //TODO: opem detail when click on item
+                //TODO: open detail when click on item
+                Cursor cursor = (Cursor) txtListaTagliandi.getItemAtPosition(i);
+                int _id = cursor.getInt(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry._ID));
+                Intent intent = new Intent(getActivity(), ItemTagliandoActivity.class);
+                intent.putExtra(ScadenzarioDBEntry.COLUMN_NAME_TARGA, _targa);
+                intent.putExtra(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, _id_auto);
+                intent.putExtra(ScadenzarioDBEntry._ID, _id);
+                intent.putExtra(Constant.IS_NEW, false);
+                startActivityForResult(intent, Constant.RELOAD_DATA);
             }
         });
         return layout;
@@ -49,6 +56,7 @@ public class TagliandiFragment extends Fragment implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         _id_auto = getArguments().getInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO);
         _targa = getArguments().getString(ScadenzarioDBEntry.COLUMN_NAME_TARGA);
+        loadData();
     }
 
     private void loadData() {
@@ -67,17 +75,9 @@ public class TagliandiFragment extends Fragment implements View.OnClickListener 
             protected void onPostExecute(Cursor cursor) {
                 if (cursor != null && cursor.getCount() > 0) {
                     try {
-                        // costruisce l'adapter per la lista
-                        ListAdapter listAdapter = new SimpleCursorAdapter(
-                                getActivity(),
-                                android.R.layout.simple_list_item_2,
-                                cursor,
-                                new String[]{ScadenzarioDBEntry.COLUMN_NAME_NOTE, ScadenzarioDBEntry.COLUMN_NAME_DATA},
-                                new int[]{android.R.id.text1, android.R.id.text2},
-                                0
-                        );
-                        txtListaTagliandi.setAdapter(listAdapter);
-                    } catch (NullPointerException e) {
+                        txtListaTagliandi.setAdapter(new ListTagliandoAdapter(getActivity(), cursor));
+                    } catch (Exception ex) {
+                        Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -87,7 +87,6 @@ public class TagliandiFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btnAdd) {
-            //TODO: aprire nuova activity
             Intent intent = new Intent(getActivity(), ItemTagliandoActivity.class);
             intent.putExtra(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, _id_auto);
             intent.putExtra(ScadenzarioDBEntry.COLUMN_NAME_TARGA, _targa);
@@ -98,7 +97,6 @@ public class TagliandiFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // Check which request we're responding to
         if (requestCode == Constant.RELOAD_DATA) {
             loadData();
         }

@@ -1,10 +1,9 @@
 package davidepatrizi.com.scadenzarioauto;
 
 import android.app.DatePickerDialog;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -17,7 +16,6 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
-import davidepatrizi.com.scadenzarioauto.R;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioAdapterDB;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
 import davidepatrizi.com.scadenzarioauto.utility.Constant;
@@ -28,19 +26,45 @@ public class ItemTagliandoActivity extends ActionBarActivity implements View.OnC
     private int mMonth;
     private int mDay;
     private Button btnManageItem;
+    private int _id;
     private int _id_auto;
     private String _targa;
     private boolean _isNew;
+    private EditText txtNote;
+    private EditText txtSpesaTagliando;
+    private TextView txtDataTagliando;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_tagliando);
+        txtDataTagliando = (TextView) findViewById(R.id.txtDataTagliando);
+        txtSpesaTagliando = (EditText) findViewById(R.id.txtSpesaTagliando);
+        txtNote = (EditText) findViewById(R.id.txtNote);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
+            _isNew = extras.getBoolean(Constant.IS_NEW);
             _id_auto = extras.getInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO);
             _targa = extras.getString(ScadenzarioDBEntry.COLUMN_NAME_TARGA);
-            _isNew = extras.getBoolean(Constant.IS_NEW);
+
+            if(!_isNew) {
+                _id = extras.getInt(ScadenzarioDBEntry._ID);
+                ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(this);
+                Cursor cursor = saDB.getTagliando(_id);
+                cursor.moveToNext();
+                try {
+
+                    //TODO: castare le date al formato dd-mm-yyyy
+
+                    String auxData = cursor.getString((cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_DATA)));
+                    auxData = auxData.substring(0, auxData.lastIndexOf(' '));
+                    txtDataTagliando.setText(auxData);
+                    txtNote.setText(cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_NOTE)));
+                    txtSpesaTagliando.setText(cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_SPESA)));
+                }catch (Exception ex){
+                    finish(); //close the activity
+                }
+            }
 
             ((EditText) findViewById(R.id.txtTarga)).setText(_targa);
             btnManageItem = ((Button) findViewById(R.id.btnManageItem));
@@ -121,15 +145,18 @@ public void onClick(View view) {
         } else if (view.getId() == R.id.btnManageItem) {
             //TODO: salva e chiudi
             try {
-                String _dataTagliando = ((TextView) findViewById(R.id.txtDataTagliando)).getText().toString();
-                float spesaTagliando = Float.parseFloat(((EditText) findViewById(R.id.txtSpesaTagliando)).getText().toString());
-                String note = ((EditText) findViewById(R.id.txtNote)).getText().toString();
+                String _dataTagliando = txtDataTagliando.getText().toString();
+                float spesaTagliando = Float.parseFloat(txtSpesaTagliando.getText().toString());
+                String note = txtNote.getText().toString();
                 Timestamp dataTagliando = new Timestamp(System.currentTimeMillis());
-                Date date = (Date) Constant.formatterDDMMYYYY.parse(_dataTagliando);
+                Date date = Constant.formatterDDMMYYYY.parse(_dataTagliando);
                 dataTagliando.setTime(date.getTime());
-
                 ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(this);
-                saDB.insertTagliando(_id_auto, dataTagliando, spesaTagliando, note);
+                if(_isNew){
+                    saDB.insertTagliando(_id_auto, dataTagliando, spesaTagliando, note);
+                }else {
+                    saDB.updateTagliando(_id, _id_auto, dataTagliando, spesaTagliando, note);
+                }
                 finish();
             } catch (ParseException ex) {
                 Toast.makeText(this, "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();

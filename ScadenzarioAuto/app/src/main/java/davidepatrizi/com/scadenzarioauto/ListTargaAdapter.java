@@ -13,14 +13,14 @@ import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
 /**
  * Created by Bobaldo on 26/02/2015.
  */
-public class ListTargheAdapter extends CursorAdapter {
-    public ListTargheAdapter(Context context, Cursor cursor) {
+public class ListTargaAdapter extends CursorAdapter {
+    public ListTargaAdapter(Context context, Cursor cursor) {
         super(context, cursor, 0);
     }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-        return LayoutInflater.from(context).inflate(R.layout.adapter_list_targhe, viewGroup, false);
+        return LayoutInflater.from(context).inflate(R.layout.adapter_list_targa, viewGroup, false);
     }
 
     @Override
