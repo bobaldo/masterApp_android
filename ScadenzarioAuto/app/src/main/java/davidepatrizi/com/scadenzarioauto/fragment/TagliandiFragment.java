@@ -49,7 +49,9 @@ public class TagliandiFragment extends Fragment implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         _id_auto = getArguments().getInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO);
         _targa = getArguments().getString(ScadenzarioDBEntry.COLUMN_NAME_TARGA);
+    }
 
+    private void loadData() {
         new AsyncTask<Void, Void, Cursor>() {
             @Override
             protected Cursor doInBackground(Void... params) {
@@ -70,7 +72,7 @@ public class TagliandiFragment extends Fragment implements View.OnClickListener 
                                 getActivity(),
                                 android.R.layout.simple_list_item_2,
                                 cursor,
-                                new String[]{ScadenzarioDBEntry.COLUMN_NAME_NOTE, ScadenzarioDBEntry.COLUMN_NAME_DATA },
+                                new String[]{ScadenzarioDBEntry.COLUMN_NAME_NOTE, ScadenzarioDBEntry.COLUMN_NAME_DATA},
                                 new int[]{android.R.id.text1, android.R.id.text2},
                                 0
                         );
@@ -90,8 +92,15 @@ public class TagliandiFragment extends Fragment implements View.OnClickListener 
             intent.putExtra(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, _id_auto);
             intent.putExtra(ScadenzarioDBEntry.COLUMN_NAME_TARGA, _targa);
             intent.putExtra(Constant.IS_NEW, true);
-            startActivity(intent);
-            //getActivity().showDialog(Constant.DIALOG_NEW_TAGLIANDO);
+            startActivityForResult(intent, Constant.RELOAD_DATA);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == Constant.RELOAD_DATA) {
+            loadData();
         }
     }
 }

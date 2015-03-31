@@ -130,11 +130,11 @@ public class ScadenzarioAdapterDB {
                         ScadenzarioDBEntry.COLUMN_NAME_DATA,
                         ScadenzarioDBEntry.COLUMN_NAME_SPESA,
                         ScadenzarioDBEntry.COLUMN_NAME_NOTE},
-                null,//ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + " =? ",
-                null,//new String[]{String.valueOf(id_auto)},
+                ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + " =? ",
+                new String[]{String.valueOf(id_auto)},
                 null,
                 null,
-                null,//ScadenzarioDBEntry.COLUMN_NAME_DATA,
+                ScadenzarioDBEntry.COLUMN_NAME_DATA,
                 null
         );
     }

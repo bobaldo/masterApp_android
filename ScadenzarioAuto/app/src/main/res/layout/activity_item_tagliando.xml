@@ -63,7 +63,7 @@
         android:layout_gravity="center_vertical" />
 
     <EditText
-        android:layout_marginLeft="@dimen/left_padding_15"
+        android:layout_marginLeft="@dimen/left_padding_30"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtNote"

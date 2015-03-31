@@ -36,7 +36,6 @@ public class ItemTagliandoActivity extends ActionBarActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_tagliando);
-        //TODO: recuperare l'id_auto
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             _id_auto = extras.getInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO);
