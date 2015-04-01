@@ -53,12 +53,9 @@ public class ItemTagliandoActivity extends ActionBarActivity implements View.OnC
                 Cursor cursor = saDB.getTagliando(_id);
                 cursor.moveToNext();
                 try {
-
-                    //TODO: castare le date al formato dd-mm-yyyy
-
-                    String auxData = cursor.getString((cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_DATA)));
-                    auxData = auxData.substring(0, auxData.lastIndexOf(' '));
-                    txtDataTagliando.setText(auxData);
+                    String data = cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_DATA));
+                    Date _date = Constant.formatterYYYYMMDD.parse(data);
+                    txtDataTagliando.setText(_date.toString());
                     txtNote.setText(cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_NOTE)));
                     txtSpesaTagliando.setText(cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_SPESA)));
                 }catch (Exception ex){

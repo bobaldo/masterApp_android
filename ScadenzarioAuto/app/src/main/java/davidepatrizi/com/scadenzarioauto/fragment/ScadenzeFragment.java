@@ -166,7 +166,7 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
     public void updateDisplay(String date, TextView textView) {
         if (!date.isEmpty() && date != null) {
             try {
-                Date _date = (Date) Constant.formatterYYYYMMDD.parse(date);
+                Date _date = Constant.formatterYYYYMMDD.parse(date);
                 Calendar c = Calendar.getInstance();
                 c.setTime(_date);
                 updateDisplay(c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH), textView, false);

@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
+import java.util.Date;
+
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
+import davidepatrizi.com.scadenzarioauto.utility.Constant;
 
 /**
  * Created by Bobaldo on 31/03/2015.
@@ -26,13 +29,12 @@ public class ListTagliandoAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         try {
-            //TODO: castare le date al formato dd-mm-yyyy
             String note = cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_NOTE));
             int _id = cursor.getInt(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry._ID));
-            String auxData = cursor.getString((cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_DATA)));
-            auxData = auxData.substring(0, auxData.lastIndexOf(' '));
+            String data = cursor.getString((cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_DATA)));
+            Date _date = Constant.formatterYYYYMMDD.parse(data);
             ((TextView) view.findViewById(R.id.txtNote)).setText(note);
-            ((TextView) view.findViewById(R.id.txtDataTagliando)).setText(auxData);
+            ((TextView) view.findViewById(R.id.txtDataTagliando)).setText(_date.toString());
             ((TextView) view.findViewById(R.id.txtIdTagliando)).setText(_id);
         } catch (Exception ex) {
             //Toast.makeText(context, "Errore: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
