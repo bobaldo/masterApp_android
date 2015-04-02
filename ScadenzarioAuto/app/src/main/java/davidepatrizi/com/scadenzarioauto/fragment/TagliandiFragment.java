@@ -1,6 +1,5 @@
 package davidepatrizi.com.scadenzarioauto.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -37,7 +36,6 @@ public class TagliandiFragment extends Fragment implements View.OnClickListener 
         this.txtListaTagliandi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //TODO: open detail when click on item
                 Cursor cursor = (Cursor) txtListaTagliandi.getItemAtPosition(i);
                 int _id = cursor.getInt(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry._ID));
                 Intent intent = new Intent(getActivity(), ItemTagliandoActivity.class);

@@ -48,7 +48,7 @@ public class ItemTagliandoActivity extends ActionBarActivity implements View.OnC
             _id_auto = extras.getInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO);
             _targa = extras.getString(ScadenzarioDBEntry.COLUMN_NAME_TARGA);
 
-            if(!_isNew) {
+            if (!_isNew) {
                 _id = extras.getInt(ScadenzarioDBEntry._ID);
                 ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(this);
                 Cursor cursor = saDB.getTagliando(_id);
@@ -79,45 +79,6 @@ public class ItemTagliandoActivity extends ActionBarActivity implements View.OnC
             mDay = calendar.get(Calendar.DAY_OF_MONTH);
             calendar = null;
         }
-        /*
-        * switch (id) {
-            case Constant.DIALOG_NEW_TAGLIANDO:
-                //TODO: inserisci nuovo tagliando
-                LayoutInflater factory = LayoutInflater.from(this);
-                alertDialogItemTagliando = new AlertDialog.Builder(this)
-                        .setTitle(R.string.ita_btnNewTagliando)
-                        .setView(factory.inflate(R.layout.dialog_new_tagliando, null))
-                        .setPositiveButton(R.string.ita_aggiungi, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                //TODO: save data
-                                /*String targa = ((TextView)((AlertDialog)dialog).findViewById(R.id.txtTarga)).getText().toString();
-                                String tipo = ((Spinner)((AlertDialog)dialog).findViewById(R.id.txtTipo)).getSelectedItem().toString();
-                                ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(((AlertDialog)dialog).getContext());
-                                saDB.insertTarga(targa,tipo);
-                                loadTarghe();
-
-    }
-})
-        .setNegativeButton(R.string.ita_cancella, new DialogInterface.OnClickListener() {
-public void onClick(DialogInterface dialog, int whichButton) {
-        }
-        })
-        .create();
-
-        View promptView = factory.inflate(R.layout.dialog_new_tagliando, null);
-        promptView.findViewById(R.id.btnDataTagliando).setOnClickListener(new View.OnClickListener() {
-@Override
-public void onClick(View view) {
-        //TODO: click sull'impostazione della data
-        DataSetterFragment dsf = new DataSetterFragment(context, mDateSetListenerDataSpesa, mYear, mMonth, mDay);
-        dsf.show();
-        }
-        });
-        ((EditText) promptView.findViewById(R.id.txtTarga)).setText(_targa);
-        return alertDialogItemTagliando;
-        *
-        * */
-
     }
 
     protected android.app.DatePickerDialog.OnDateSetListener mDateSetListenerDataSpesa =
@@ -140,7 +101,6 @@ public void onClick(View view) {
             DataSetterFragment dsf = new DataSetterFragment(this, mDateSetListenerDataSpesa, mYear, mMonth, mDay);
             dsf.show();
         } else if (view.getId() == R.id.btnManageItem) {
-            //TODO: salva e chiudi
             try {
                 String _dataTagliando = txtDataTagliando.getText().toString();
                 float spesaTagliando = Float.parseFloat(txtSpesaTagliando.getText().toString());

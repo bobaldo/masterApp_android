@@ -67,8 +67,8 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
         this.txtAllarmaScadenzaBollo = (CheckBox) layout.findViewById(R.id.txtAllarmaScadenzaBollo);
         _id_auto = getArguments().getInt(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO);
         _targa = getArguments().getString(ScadenzarioDBEntry.COLUMN_NAME_TARGA);
-        ((Button) layout.findViewById(R.id.btnScadenzaAssicurazione)).setOnClickListener(this);
-        ((Button) layout.findViewById(R.id.btnScadenzaBollo)).setOnClickListener(this);
+        (layout.findViewById(R.id.btnScadenzaAssicurazione)).setOnClickListener(this);
+        (layout.findViewById(R.id.btnScadenzaBollo)).setOnClickListener(this);
         txtAllarmaScadenzaBollo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (onFireCheckedEvent) {
@@ -184,7 +184,7 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
                 .append(year).append(" "));
         if (doSave) {
             if (save()) {
-                //TODO: Toast di avviso salvataggio ok che discrimina sul textView
+                ;
                 //Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
             }
         }
