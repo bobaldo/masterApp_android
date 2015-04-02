@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
+import davidepatrizi.com.scadenzarioauto.adapter.ListTargaAdapter;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioAdapterDB;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
 import davidepatrizi.com.scadenzarioauto.utility.Constant;

@@ -1,4 +1,4 @@
-package davidepatrizi.com.scadenzarioauto;
+package davidepatrizi.com.scadenzarioauto.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.Date;
 
+import davidepatrizi.com.scadenzarioauto.R;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
 import davidepatrizi.com.scadenzarioauto.utility.Constant;
 import davidepatrizi.com.scadenzarioauto.utility.DateManage;

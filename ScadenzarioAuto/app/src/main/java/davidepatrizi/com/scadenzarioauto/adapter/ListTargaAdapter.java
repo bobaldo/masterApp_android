@@ -1,4 +1,4 @@
-package davidepatrizi.com.scadenzarioauto;
+package davidepatrizi.com.scadenzarioauto.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
+import davidepatrizi.com.scadenzarioauto.R;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
 
 /**

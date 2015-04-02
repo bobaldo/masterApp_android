@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import davidepatrizi.com.scadenzarioauto.ListTagliandoAdapter;
+import davidepatrizi.com.scadenzarioauto.adapter.ListTagliandoAdapter;
 import davidepatrizi.com.scadenzarioauto.R;
 import davidepatrizi.com.scadenzarioauto.ItemTagliandoActivity;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioAdapterDB;
