@@ -178,11 +178,10 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
     }
 
     public void updateDisplay(int year, int month, int day, TextView textView, boolean doSave) {
-        textView.setText(
-                new StringBuilder()
-                        .append(day).append("-")
-                        .append(month + 1).append("-")
-                        .append(year).append(" "));
+        textView.setText(new StringBuilder()
+                .append(day).append("-")
+                .append(month + 1).append("-")
+                .append(year).append(" "));
         if (doSave) {
             if (save()) {
                 //TODO: Toast di avviso salvataggio ok che discrimina sul textView
@@ -211,7 +210,7 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
             String timeBol = txtScadenzaBollo.getText().toString();
             if (timeAss != null) {
                 try {
-                    Date date = (Date) Constant.formatterDDMMYYYY.parse(timeAss);
+                    Date date = Constant.formatterDDMMYYYY.parse(timeAss);
                     assicurazione.setTime(date.getTime());
                 } catch (ParseException ex) {
                     Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
@@ -221,7 +220,7 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
 
             if (timeBol != null) {
                 try {
-                    Date date = (Date) Constant.formatterDDMMYYYY.parse(timeBol);
+                    Date date = Constant.formatterDDMMYYYY.parse(timeBol);
                     bollo.setTime(date.getTime());
                 } catch (ParseException ex) {
                     Toast.makeText(getActivity(), "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();

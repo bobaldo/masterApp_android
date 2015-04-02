@@ -20,6 +20,7 @@ import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioAdapterDB;
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
 import davidepatrizi.com.scadenzarioauto.utility.Constant;
 import davidepatrizi.com.scadenzarioauto.utility.DataSetterFragment;
+import davidepatrizi.com.scadenzarioauto.utility.DateManage;
 
 public class ItemTagliandoActivity extends ActionBarActivity implements View.OnClickListener {
     private int mYear;
@@ -54,11 +55,10 @@ public class ItemTagliandoActivity extends ActionBarActivity implements View.OnC
                 cursor.moveToNext();
                 try {
                     String data = cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_DATA));
-                    Date _date = Constant.formatterYYYYMMDD.parse(data);
-                    txtDataTagliando.setText(_date.toString());
+                    txtDataTagliando.setText(DateManage.setDate(data, Constant.formatterYYYYMMDD));
                     txtNote.setText(cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_NOTE)));
                     txtSpesaTagliando.setText(cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_SPESA)));
-                }catch (Exception ex){
+                } catch (Exception ex) {
                     finish(); //close the activity
                 }
             }

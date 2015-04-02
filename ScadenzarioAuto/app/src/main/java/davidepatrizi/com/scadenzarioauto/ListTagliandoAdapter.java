@@ -12,6 +12,7 @@ import java.util.Date;
 
 import davidepatrizi.com.scadenzarioauto.dba.ScadenzarioDBEntry;
 import davidepatrizi.com.scadenzarioauto.utility.Constant;
+import davidepatrizi.com.scadenzarioauto.utility.DateManage;
 
 /**
  * Created by Bobaldo on 31/03/2015.
@@ -32,9 +33,8 @@ public class ListTagliandoAdapter extends CursorAdapter {
             String note = cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_NOTE));
             int _id = cursor.getInt(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry._ID));
             String data = cursor.getString((cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_DATA)));
-            Date _date = Constant.formatterYYYYMMDD.parse(data);
             ((TextView) view.findViewById(R.id.txtNote)).setText(note);
-            ((TextView) view.findViewById(R.id.txtDataTagliando)).setText(_date.toString());
+            ((TextView) view.findViewById(R.id.txtDataTagliando)).setText(DateManage.setDate(data, Constant.formatterYYYYMMDD));
             ((TextView) view.findViewById(R.id.txtIdTagliando)).setText(_id);
         } catch (Exception ex) {
             //Toast.makeText(context, "Errore: " + ex.getMessage(), Toast.LENGTH_SHORT).show();
