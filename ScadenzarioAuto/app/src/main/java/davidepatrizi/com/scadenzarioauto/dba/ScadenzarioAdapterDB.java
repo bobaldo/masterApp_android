@@ -127,7 +127,6 @@ public class ScadenzarioAdapterDB {
     }
 
     public Cursor getTagliandi(int id_auto) {
-        //TODO: invertire l'ordine per data
         return db.query(false,
                 ScadenzarioDBEntry.TABLE_NAME_TAGLIANDO,
                 new String[]{ScadenzarioDBEntry._ID,
@@ -139,7 +138,7 @@ public class ScadenzarioAdapterDB {
                 new String[]{String.valueOf(id_auto)},
                 null,
                 null,
-                ScadenzarioDBEntry.COLUMN_NAME_DATA,
+                ScadenzarioDBEntry.COLUMN_NAME_DATA + " DESC",
                 null
         );
     }
