@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -75,20 +76,20 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
     }
 
-    public void setAlarm(Context context, int tipoAlarm, String _scadenza, String targa) {
+    public void setAlarm(Context context, int tipoAlarm, String _scadenza, String targa) throws ParseException {
         //ASSUNZIONE: l'alert viene inviato il mese prima della scadenza intorno alle 10:10
+        Date date = Constant.formatterYYYYMMDD.parse(_scadenza);
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date(_scadenza));
-        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.setTime(date);
         calendar.set(Calendar.HOUR_OF_DAY, 10);
         calendar.set(Calendar.MINUTE, 10);
         int month = calendar.get(Calendar.MONTH);
         calendar.set(Calendar.MONTH, month - 1);
 
-        Log.w("PD", "scadenza: " + calendar.getTime().toString());
+        Log.w("PD", "scadenza: " + _scadenza + " allarme: " + calendar.getTime().toString());
         intentAssicurazione = new Intent(context, AlarmReceiver.class);
         intentAssicurazione.putExtra(Constant.TIPO_ALARM, tipoAlarm);
-        intentAssicurazione.putExtra(Constant.SCADENZA, _scadenza);
+        intentAssicurazione.putExtra(Constant.SCADENZA, calendar.getTime().toString());
         intentAssicurazione.putExtra(Constant.TARGA, targa);
         pendingIntentAssicurazione = PendingIntent.getBroadcast(context, 0, intentAssicurazione, 0);
         am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);

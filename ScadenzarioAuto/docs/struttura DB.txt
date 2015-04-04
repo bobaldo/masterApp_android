@@ -9,7 +9,8 @@ SCADENZA
 	id_auto
 	assicurazione
 	bollo
-	allarmata
+	allarmata_assicurazione
+	allarmata_bollo
 
 TAGLIANDO
 	_id
