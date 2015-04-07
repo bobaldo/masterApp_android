@@ -12,32 +12,32 @@
     android:columnCount="2"
     android:orientation="horizontal">
 
-    <Button
+    <ImageButton
         android:textSize="@dimen/abc_text_size_medium_material"
         android:layout_gravity="fill"
         android:minHeight="@dimen/activity_mezzo_minMeasure"
         android:minWidth="@dimen/activity_mezzo_minMeasure"
         android:text="@string/ita_info"
-        android:id="@+id/btnInfo"
+        android:src="@drawable/info"
         android:layout_row="0"
         android:layout_column="0" />
 
-    <Button
+    <ImageButton
         android:textSize="@dimen/abc_text_size_medium_material"
         android:layout_gravity="fill"
         android:minHeight="@dimen/activity_mezzo_minMeasure"
         android:minWidth="@dimen/activity_mezzo_minMeasure"
-        android:text="@string/ita_scadenze"
+        android:src="@drawable/scadenze"
         android:id="@+id/btnScadenze"
         android:layout_row="0"
         android:layout_column="1" />
 
-    <Button
+    <ImageButton
         android:textSize="@dimen/abc_text_size_medium_material"
         android:layout_gravity="fill"
         android:minHeight="@dimen/activity_mezzo_minMeasure"
         android:minWidth="@dimen/activity_mezzo_minMeasure"
-        android:text="@string/ita_tagliandi"
+        android:src="@drawable/tagliando"
         android:id="@+id/btnTagliandi"
         android:layout_row="1"
         android:layout_column="0" />
