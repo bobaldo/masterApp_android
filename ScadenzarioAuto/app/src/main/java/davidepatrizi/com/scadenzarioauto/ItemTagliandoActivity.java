@@ -69,7 +69,7 @@ public class ItemTagliandoActivity extends ActionBarActivity implements View.OnC
             btnManageItem.setOnClickListener(this);
             ((Button) findViewById(R.id.btnDataTagliando)).setOnClickListener(this);
             if (_isNew) {
-                setTitle(getString(R.string.ita_aggungi_tagliando_per) + " " + _targa);
+                setTitle(getString(R.string.ita_aggiungi_tagliando_per) + " " + _targa);
             } else {
                 setTitle(getString(R.string.ita_modifica_tagliando_per) + " " + _targa);
             }

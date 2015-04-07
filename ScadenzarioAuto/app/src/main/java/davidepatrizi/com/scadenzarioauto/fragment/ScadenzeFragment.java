@@ -85,7 +85,7 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
                             alarm.setAlarm(getActivity(), Constant.ALARM_SCADENZA_BOLLO, scadenzeItem.getBollo().toString(), _targa);
                             Toast.makeText(getActivity(), R.string.ita_avviso_bollo_attivato, Toast.LENGTH_LONG).show();
                         } catch (ParseException ex) {
-                            Toast.makeText(getActivity(), R.string.ita_avvismo_impossibile_impostare_allarme, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), R.string.ita_avviso_impossibile_impostare_allarme, Toast.LENGTH_LONG).show();
                         }
                     } else {
                         alarm.cancelAlarm(getActivity(), Constant.ALARM_SCADENZA_BOLLO, scadenzeItem.getBollo().toString(), _targa);
@@ -104,7 +104,7 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
                             alarm.setAlarm(getActivity(), Constant.ALARM_SCADENZA_ASSICURAZIONE, scadenzeItem.getAssicurazione().toString(), _targa);
                             Toast.makeText(getActivity(), R.string.ita_avviso_assicurazione_attivato, Toast.LENGTH_LONG).show();
                         } catch (ParseException ex) {
-                            Toast.makeText(getActivity(), R.string.ita_avvismo_impossibile_impostare_allarme, Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), R.string.ita_avviso_impossibile_impostare_allarme, Toast.LENGTH_LONG).show();
                         }
                     } else {
                         alarm.cancelAlarm(getActivity(), Constant.ALARM_SCADENZA_ASSICURAZIONE, scadenzeItem.getAssicurazione().toString(), _targa);
