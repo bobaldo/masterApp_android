@@ -51,8 +51,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             switch (tipoAlarm) {
                 case Constant.ALARM_SCADENZA_ASSICURAZIONE:
                     builder = new NotificationCompat.Builder(context)
-                            //TODO: inserire mia icona app
-                            .setSmallIcon(R.drawable.abc_btn_radio_material)
+                            .setSmallIcon(R.drawable.icona)
                             .setContentTitle(res.getString(R.string.ita_scadenza_assicurazione))
                             .setColor(Color.RED)
                             .setContentText(String.format(aux, targa.toUpperCase(), scadenza));
@@ -63,7 +62,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                     break;
                 case Constant.ALARM_SCADENZA_BOLLO:
                     builder = new NotificationCompat.Builder(context)
-                            //TODO: inserire mia icona app
+                            .setSmallIcon(R.drawable.icona)
                             .setSmallIcon(R.drawable.abc_btn_radio_material)
                             .setContentTitle(res.getString(R.string.ita_scadenza_bollo))
                             .setColor(Color.RED)
