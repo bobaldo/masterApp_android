@@ -62,7 +62,7 @@ public class MezzoActivity extends ActionBarActivity {
                         .setPositiveButton(R.string.ita_confermo, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 try {
-                                    ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(getApplicationContext());
+                                    ScadenzarioAdapterDB saDB = ScadenzarioAdapterDB.getInstance(getApplicationContext());
                                     saDB.deleteTarga(_id_auto);
                                     goMainActivity();
                                 } catch (Exception ex) {

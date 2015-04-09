@@ -43,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.txtListaTarghe);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 try {
@@ -76,7 +76,7 @@ public class MainActivity extends ActionBarActivity {
         new AsyncTask<Void, Void, Cursor>() {
             @Override
             protected Cursor doInBackground(Void... voids) {
-                ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(context);
+                ScadenzarioAdapterDB saDB = ScadenzarioAdapterDB.getInstance(context);
                 return saDB.getMezzo();
             }
 
@@ -106,10 +106,10 @@ public class MainActivity extends ActionBarActivity {
                         .setView(factory.inflate(R.layout.dialog_new_mezzo, null))
                         .setPositiveButton(R.string.ita_aggiungi, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                String targa = ((TextView)((AlertDialog)dialog).findViewById(R.id.txtTarga)).getText().toString();
-                                String tipo = ((Spinner)((AlertDialog)dialog).findViewById(R.id.txtTipo)).getSelectedItem().toString();
-                                ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(((AlertDialog)dialog).getContext());
-                                saDB.insertTarga(targa,tipo);
+                                String targa = ((TextView) ((AlertDialog) dialog).findViewById(R.id.txtTarga)).getText().toString();
+                                String tipo = ((Spinner) ((AlertDialog) dialog).findViewById(R.id.txtTipo)).getSelectedItem().toString();
+                                ScadenzarioAdapterDB saDB = ScadenzarioAdapterDB.getInstance(((AlertDialog) dialog).getContext());
+                                saDB.insertTarga(targa, tipo);
                                 loadTarghe();
                             }
                         })
@@ -137,7 +137,7 @@ public class MainActivity extends ActionBarActivity {
                 Intent vi = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (vi.resolveActivity(getPackageManager()) != null) {
                     startActivityForResult(vi, Constant.REQUEST_CAMERA);
-                }else{
+                } else {
                     //TODO:capire se mettere dialog
                     Toast.makeText(context, R.string.ita_message_camera_non_presente, Toast.LENGTH_SHORT).show();
                 }
@@ -149,7 +149,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onActivityResult(int req, int res, Intent data) {
         if (req == Constant.REQUEST_CAMERA && res == RESULT_OK) {
-          //  Uri video = data.getData();
+            //  Uri video = data.getData();
             // myVideoView.setVideoURI(video);
             String targaTakenFromCamera = onPhotoTaken(data.getData());
         }
@@ -160,7 +160,7 @@ public class MainActivity extends ActionBarActivity {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 4;
 
-        Bitmap bitmap = BitmapFactory.decodeFile( data.toString(), options);
+        Bitmap bitmap = BitmapFactory.decodeFile(data.toString(), options);
 
         try {
             ExifInterface exif = new ExifInterface(data.toString());
@@ -244,7 +244,7 @@ public class MainActivity extends ActionBarActivity {
         //Log.v(TAG, "OCRED TEXT: " + recognizedText);
 
         //if ( lang.equalsIgnoreCase("eng") ) {
-            //recognizedText = recognizedText.replaceAll("[^a-zA-Z0-9]+", " ");
+        //recognizedText = recognizedText.replaceAll("[^a-zA-Z0-9]+", " ");
         //}
 
         return "";// recognizedText.trim();

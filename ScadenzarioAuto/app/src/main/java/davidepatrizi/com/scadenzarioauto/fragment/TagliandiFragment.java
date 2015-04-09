@@ -62,7 +62,7 @@ public class TagliandiFragment extends Fragment implements View.OnClickListener 
             @Override
             protected Cursor doInBackground(Void... params) {
                 try {
-                    ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(getActivity());
+                    ScadenzarioAdapterDB saDB = ScadenzarioAdapterDB.getInstance(getActivity());
                     return saDB.getTagliandi(_id_auto);
                 } catch (NullPointerException e) { // se l'activity viene distrutta
                     return null;

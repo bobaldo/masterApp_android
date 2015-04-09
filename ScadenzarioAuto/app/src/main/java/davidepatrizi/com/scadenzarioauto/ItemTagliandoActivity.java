@@ -50,7 +50,7 @@ public class ItemTagliandoActivity extends ActionBarActivity implements View.OnC
 
             if (!_isNew) {
                 _id = extras.getInt(ScadenzarioDBEntry._ID);
-                ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(this);
+                ScadenzarioAdapterDB saDB = ScadenzarioAdapterDB.getInstance(this);
                 Cursor cursor = saDB.getTagliando(_id);
                 cursor.moveToNext();
                 try {
@@ -108,16 +108,16 @@ public class ItemTagliandoActivity extends ActionBarActivity implements View.OnC
                 Timestamp dataTagliando = new Timestamp(System.currentTimeMillis());
                 Date date = Constant.formatterDDMMYYYY.parse(_dataTagliando);
                 dataTagliando.setTime(date.getTime());
-                ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(this);
-                if(_isNew){
+                ScadenzarioAdapterDB saDB = ScadenzarioAdapterDB.getInstance(this);
+                if (_isNew) {
                     saDB.insertTagliando(_id_auto, dataTagliando, spesaTagliando, note);
-                }else {
+                } else {
                     saDB.updateTagliando(_id, _id_auto, dataTagliando, spesaTagliando, note);
                 }
                 finish();
             } catch (ParseException ex) {
                 Toast.makeText(this, "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 Toast.makeText(this, R.string.ita_message_data_errata, Toast.LENGTH_LONG).show();
             }
         }

@@ -58,7 +58,7 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
         mDayBol = mDayAss = calendar.get(Calendar.DAY_OF_MONTH);
         calendar = null;
         alarm = new AlarmReceiver();
-        saDB = new ScadenzarioAdapterDB(getActivity());
+        saDB = ScadenzarioAdapterDB.getInstance(getActivity());
     }
 
     @Override

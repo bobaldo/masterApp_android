@@ -12,24 +12,19 @@ import java.sql.Timestamp;
  * Created by Bobaldo on 18/03/2015.
  */
 public class ScadenzarioAdapterDB {
-    //TODO: passare al paradigma Singleton
-    /*
-    * private static AppManager   _instance;
+    //uso paradigma singleton
+    private Context ctx;
+    private SQLiteDatabase db;
+    private static ScadenzarioAdapterDB _instance;
 
-    private AppManager()    {    }
-
-    public synchronized static AppManager getInstance()
-    {
-        if (_instance == null)        {
-            _instance = new AppManager();
+    public synchronized static ScadenzarioAdapterDB getInstance(Context context) {
+        if (_instance == null) {
+            _instance = new ScadenzarioAdapterDB(context);
         }
         return _instance;
     }
-    */
-    private Context ctx;
-    private SQLiteDatabase db;
 
-    public ScadenzarioAdapterDB(Context context) {
+    private ScadenzarioAdapterDB(Context context) {
         this.ctx = context;
         ScadenzarioDBHelper wiFiDbHelper = new ScadenzarioDBHelper(ctx);
         db = wiFiDbHelper.getReadableDatabase();
@@ -78,8 +73,8 @@ public class ScadenzarioAdapterDB {
 
     public void insertScadenze(int id_auto, Timestamp bollo, Timestamp assicurazione, boolean allarmaBollo, boolean allarmaAssicurazione) {
         Cursor cursor = getScadenze(id_auto);
-        if(!(cursor != null && cursor.getCount() > 0)){
-            //ramo che deve creare la riga da aggiornare nella tabella scadenza
+        if (!(cursor != null && cursor.getCount() > 0)) {
+            //creao la riga da aggiornare nella tabella scadenza
             ContentValues contentValues = new ContentValues();
             contentValues.put(ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO, id_auto);
             db.insert(ScadenzarioDBEntry.TABLE_NAME_SCADENZA, null, contentValues);

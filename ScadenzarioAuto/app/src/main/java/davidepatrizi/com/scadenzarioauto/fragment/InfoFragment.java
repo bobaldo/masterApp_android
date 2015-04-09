@@ -39,7 +39,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
 
             @Override
             protected Cursor doInBackground(Void... voids) {
-                ScadenzarioAdapterDB saDB = new ScadenzarioAdapterDB(getActivity());
+                ScadenzarioAdapterDB saDB = ScadenzarioAdapterDB.getInstance(getActivity());
                 return saDB.getMezzo(_id_auto);
             }
 
