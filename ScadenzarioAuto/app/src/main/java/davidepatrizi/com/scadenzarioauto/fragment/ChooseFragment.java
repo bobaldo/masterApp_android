@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import davidepatrizi.com.scadenzarioauto.MezzoActivity;
 import davidepatrizi.com.scadenzarioauto.R;
@@ -21,9 +22,9 @@ public class ChooseFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.fragment_choose, container, false);
-        ((Button) layout.findViewById(R.id.btnInfo)).setOnClickListener(this);
-        ((Button) layout.findViewById(R.id.btnScadenze)).setOnClickListener(this);
-        ((Button) layout.findViewById(R.id.btnTagliandi)).setOnClickListener(this);
+        ((ImageButton) layout.findViewById(R.id.btnInfo)).setOnClickListener(this);
+        ((ImageButton) layout.findViewById(R.id.btnScadenze)).setOnClickListener(this);
+        ((ImageButton) layout.findViewById(R.id.btnTagliandi)).setOnClickListener(this);
         return layout;
     }
 

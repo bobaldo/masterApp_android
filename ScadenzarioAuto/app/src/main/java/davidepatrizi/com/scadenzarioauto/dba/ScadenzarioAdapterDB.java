@@ -13,6 +13,19 @@ import java.sql.Timestamp;
  */
 public class ScadenzarioAdapterDB {
     //TODO: passare al paradigma Singleton
+    /*
+    * private static AppManager   _instance;
+
+    private AppManager()    {    }
+
+    public synchronized static AppManager getInstance()
+    {
+        if (_instance == null)        {
+            _instance = new AppManager();
+        }
+        return _instance;
+    }
+    */
     private Context ctx;
     private SQLiteDatabase db;
 
@@ -84,30 +97,6 @@ public class ScadenzarioAdapterDB {
                 ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + " =? ",
                 new String[]{String.valueOf(id_auto)});
     }
-
-    /*
-    //TODO: can be eliminated
-    public void insertScadenzaBollo(int id_auto, Timestamp bollo) {
-        String auxBollo = String.valueOf(bollo);
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ScadenzarioDBEntry.COLUMN_NAME_BOLLO, auxBollo);
-        insertScadenza(contentValues, auxBollo, id_auto);
-    }
-
-    public void insertScadenzaAssicurazione(int id_auto, Timestamp assicurazione) {
-        String auxAssicurazione = String.valueOf(assicurazione);
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ScadenzarioDBEntry.COLUMN_NAME_ASSICURAZIONE, auxAssicurazione);
-        insertScadenza(contentValues, auxAssicurazione, id_auto);
-    }
-
-    private void insertScadenza(ContentValues cv, String scadenza, int id_auto) {
-        db.update(ScadenzarioDBEntry.TABLE_NAME_SCADENZA,
-                cv,
-                ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + " =? ",
-                new String[]{String.valueOf(id_auto)});
-    }
-    */
 
     public Cursor getTagliando(int id) {
         return db.query(false,
