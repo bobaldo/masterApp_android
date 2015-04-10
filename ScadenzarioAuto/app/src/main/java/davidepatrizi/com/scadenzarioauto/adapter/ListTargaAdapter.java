@@ -36,7 +36,7 @@ public class ListTargaAdapter extends CursorAdapter {
             String targa = cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_TARGA));
             int _id = cursor.getInt(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry._ID));
             String tipo = cursor.getString((cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_TIPO)));
-            ((TextView) view.findViewById(R.id.txtTarga)).setText(targa);
+            ((TextView) view.findViewById(R.id.txtTarga)).setText(targa.toUpperCase());
             ((TextView) view.findViewById(R.id.txtTipo)).setText(tipo);
             ((TextView) view.findViewById(R.id.txtIdTarga)).setText(String.valueOf(_id));
             ImageView iv = (ImageView) view.findViewById(R.id.txtImageTipoMezzo);
