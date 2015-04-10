@@ -83,10 +83,14 @@ public class ScadenzarioAdapterDB {
         String auxBollo = String.valueOf(bollo);
         String auxAssicurazione = String.valueOf(assicurazione);
         ContentValues contentValues = new ContentValues();
-        contentValues.put(ScadenzarioDBEntry.COLUMN_NAME_BOLLO, auxBollo);
-        contentValues.put(ScadenzarioDBEntry.COLUMN_NAME_ASSICURAZIONE, auxAssicurazione);
-        contentValues.put(ScadenzarioDBEntry.COLUMN_NAME_ALLARMATA_ASSICURAZIONE, allarmaAssicurazione);
-        contentValues.put(ScadenzarioDBEntry.COLUMN_NAME_ALLARMATA_BOLLO, allarmaBollo);
+        if(!auxBollo.equals("null")) {
+            contentValues.put(ScadenzarioDBEntry.COLUMN_NAME_BOLLO, auxBollo);
+            contentValues.put(ScadenzarioDBEntry.COLUMN_NAME_ALLARMATA_BOLLO, allarmaBollo);
+        }
+        if(!auxAssicurazione.equals("null")) {
+            contentValues.put(ScadenzarioDBEntry.COLUMN_NAME_ASSICURAZIONE, auxAssicurazione);
+            contentValues.put(ScadenzarioDBEntry.COLUMN_NAME_ALLARMATA_ASSICURAZIONE, allarmaAssicurazione);
+        }
         db.update(ScadenzarioDBEntry.TABLE_NAME_SCADENZA,
                 contentValues,
                 ScadenzarioDBEntry.COLUMN_NAME_ID_AUTO + " =? ",

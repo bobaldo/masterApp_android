@@ -20,6 +20,10 @@ public class ScadenzeItem {
     private boolean allarmaAssicurazione;
     private boolean allarmaBollo;
 
+    public ScadenzeItem(int _id_auto){
+        setIdAuto(_id_auto);
+    }
+
     public ScadenzeItem(Cursor cursor, int _id_auto) throws ParseException {
         setIdAuto(_id_auto);
         setAssicurazione(cursor.getString(cursor.getColumnIndexOrThrow(ScadenzarioDBEntry.COLUMN_NAME_ASSICURAZIONE)));
@@ -41,15 +45,19 @@ public class ScadenzeItem {
     }
 
     public void setAssicurazione(int day, int month, int year) {
-        Calendar c = Calendar.getInstance();
-        c.set(year, month, day);
-        this.assicurazione = new Timestamp(c.getTimeInMillis());
+        try {
+            Calendar c = Calendar.getInstance();
+            c.set(year, month, day);
+            this.assicurazione = new Timestamp(c.getTimeInMillis());
+        } catch (Exception ex) {
+            //va in eccezione se non vengono passati valori consoni per creare una data
+        }
     }
 
     private void setAssicurazione(String value) throws ParseException {
         Log.w("PD", "assicurazione " + value);
-        this.assicurazione = new Timestamp(System.currentTimeMillis());
         if (value != null) {
+            this.assicurazione = new Timestamp(System.currentTimeMillis());
             Date date = Constant.formatterYYYYMMDD.parse(value);
             this.assicurazione.setTime(date.getTime());
         }
@@ -61,8 +69,8 @@ public class ScadenzeItem {
 
     private void setBollo(String value) throws ParseException {
         Log.w("PD", "bollo " + value);
-        this.bollo = new Timestamp(System.currentTimeMillis());
         if (value != null) {
+            this.bollo = new Timestamp(System.currentTimeMillis());
             Date date = Constant.formatterYYYYMMDD.parse(value);
             this.bollo.setTime(date.getTime());
         }

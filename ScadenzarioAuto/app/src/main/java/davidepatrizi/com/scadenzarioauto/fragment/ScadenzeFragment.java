@@ -140,6 +140,7 @@ public class ScadenzeFragment extends Fragment implements View.OnClickListener {
                         ((MezzoActivity) getActivity()).goMainActivity();
                     }
                 } else {
+                    scadenzeItem = new ScadenzeItem(_id_auto);
                     txtScadenzaAssicurazione.setText("");
                     txtScadenzaBollo.setText("");
                     txtAllarmaScadenzaAssicurazione.setChecked(false);
