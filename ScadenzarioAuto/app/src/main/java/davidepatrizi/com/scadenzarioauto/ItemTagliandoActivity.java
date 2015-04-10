@@ -65,13 +65,13 @@ public class ItemTagliandoActivity extends ActionBarActivity implements View.OnC
 
             ((EditText) findViewById(R.id.txtTarga)).setText(_targa);
             btnManageItem = ((Button) findViewById(R.id.btnManageItem));
-            btnManageItem.setText(R.string.ita_salva);
+            btnManageItem.setText(R.string.salva);
             btnManageItem.setOnClickListener(this);
             ((Button) findViewById(R.id.btnDataTagliando)).setOnClickListener(this);
             if (_isNew) {
-                setTitle(getString(R.string.ita_aggiungi_tagliando_per) + " " + _targa);
+                setTitle(getString(R.string.aggiungi_tagliando_per) + " " + _targa);
             } else {
-                setTitle(getString(R.string.ita_modifica_tagliando_per) + " " + _targa);
+                setTitle(getString(R.string.modifica_tagliando_per) + " " + _targa);
             }
             Calendar calendar = Calendar.getInstance();
             mYear = calendar.get(Calendar.YEAR);
@@ -118,7 +118,7 @@ public class ItemTagliandoActivity extends ActionBarActivity implements View.OnC
             } catch (ParseException ex) {
                 Toast.makeText(this, "Errore: " + ex.getMessage(), Toast.LENGTH_LONG).show();
             } catch (Exception ex) {
-                Toast.makeText(this, R.string.ita_message_data_errata, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.message_data_errata, Toast.LENGTH_LONG).show();
             }
         }
     }

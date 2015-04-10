@@ -102,9 +102,9 @@ public class MainActivity extends ActionBarActivity {
             case Constant.DIALOG_NEW_MEZZO:
                 LayoutInflater factory = LayoutInflater.from(this);
                 return new AlertDialog.Builder(this)
-                        .setTitle(R.string.ita_btnNewMezzo)
+                        .setTitle(R.string.btnNewMezzo)
                         .setView(factory.inflate(R.layout.dialog_new_mezzo, null))
-                        .setPositiveButton(R.string.ita_aggiungi, new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.aggiungi, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 String targa = ((TextView) ((AlertDialog) dialog).findViewById(R.id.txtTarga)).getText().toString();
                                 String tipo = ((Spinner) ((AlertDialog) dialog).findViewById(R.id.txtTipo)).getSelectedItem().toString();
@@ -113,7 +113,7 @@ public class MainActivity extends ActionBarActivity {
                                 loadTarghe();
                             }
                         })
-                        .setNegativeButton(R.string.ita_cancella, new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.cancella, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                             }
                         })
@@ -139,7 +139,7 @@ public class MainActivity extends ActionBarActivity {
                     startActivityForResult(vi, Constant.REQUEST_CAMERA);
                 } else {
                     //TODO:capire se mettere dialog
-                    Toast.makeText(context, R.string.ita_message_camera_non_presente, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.message_camera_non_presente, Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

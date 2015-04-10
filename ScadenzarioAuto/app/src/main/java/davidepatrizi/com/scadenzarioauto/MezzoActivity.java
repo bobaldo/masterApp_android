@@ -57,9 +57,9 @@ public class MezzoActivity extends ActionBarActivity {
         switch (id) {
             case Constant.DIALOG_DELETE_CONFIRM:
                 return new AlertDialog.Builder(this)
-                        .setTitle(R.string.ita_eliminazione_targa)
-                        .setMessage(R.string.ita_message_eliminazione_targa)
-                        .setPositiveButton(R.string.ita_confermo, new DialogInterface.OnClickListener() {
+                        .setTitle(R.string.eliminazione_targa)
+                        .setMessage(R.string.message_eliminazione_targa)
+                        .setPositiveButton(R.string.confermo, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                                 try {
                                     ScadenzarioAdapterDB saDB = ScadenzarioAdapterDB.getInstance(getApplicationContext());
@@ -70,7 +70,7 @@ public class MezzoActivity extends ActionBarActivity {
                                 }
                             }
                         })
-                        .setNegativeButton(R.string.ita_annulla, new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.annulla, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
                             }
                         })
@@ -81,19 +81,19 @@ public class MezzoActivity extends ActionBarActivity {
 
     public void showInfo() {
         isShowChoose = false;
-        this.setTitle(getString(R.string.ita_title_show_info) + " " + _targa.toUpperCase());
+        this.setTitle(getString(R.string.title_show_info) + " " + _targa.toUpperCase());
         showFragment(new InfoFragment(), true);
     }
 
     public void showTagliando() {
         isShowChoose = false;
-        this.setTitle(getString(R.string.ita_title_show_tagliando) + " " + _targa.toUpperCase());
+        this.setTitle(getString(R.string.title_show_tagliando) + " " + _targa.toUpperCase());
         showFragment(new TagliandiFragment(), true);
     }
 
     public void showScadenza() {
         isShowChoose = false;
-        this.setTitle(getString(R.string.ita_title_show_scadenza) + " " + _targa.toUpperCase());
+        this.setTitle(getString(R.string.title_show_scadenza) + " " + _targa.toUpperCase());
         showFragment(new ScadenzeFragment(), true);
     }
 

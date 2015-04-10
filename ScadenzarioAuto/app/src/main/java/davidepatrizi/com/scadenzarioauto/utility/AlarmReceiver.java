@@ -51,9 +51,9 @@ public class AlarmReceiver extends BroadcastReceiver {
                 case Constant.ALARM_SCADENZA_ASSICURAZIONE:
                     builder = new NotificationCompat.Builder(context)
                             .setSmallIcon(R.drawable.icona)
-                            .setContentTitle(res.getString(R.string.ita_scadenza_assicurazione))
+                            .setContentTitle(res.getString(R.string.scadenza_assicurazione))
                             .setColor(Color.RED)
-                            .setContentText(String.format(res.getString(R.string.ita_notifica_scadenza_assicurazione), targa.toUpperCase(), scadenza));
+                            .setContentText(String.format(res.getString(R.string.notifica_scadenza_assicurazione), targa.toUpperCase(), scadenza));
                     notification = builder.build();
                     nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                     nm.notify(Constant.NOTIFICA_SCADENZA_ASSICURAZIONE, notification);
@@ -63,9 +63,9 @@ public class AlarmReceiver extends BroadcastReceiver {
                     builder = new NotificationCompat.Builder(context)
                             .setSmallIcon(R.drawable.icona)
                             .setSmallIcon(R.drawable.abc_btn_radio_material)
-                            .setContentTitle(res.getString(R.string.ita_scadenza_bollo))
+                            .setContentTitle(res.getString(R.string.scadenza_bollo))
                             .setColor(Color.RED)
-                            .setContentText(String.format(res.getString(R.string.ita_notifica_scadenza_bollo), targa.toUpperCase(), scadenza));
+                            .setContentText(String.format(res.getString(R.string.notifica_scadenza_bollo), targa.toUpperCase(), scadenza));
                     notification = builder.build();
                     nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                     nm.notify(Constant.NOTIFICA_SCADENZA_BOLLO, notification);

@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/ita_targa" />
+        android:text="@string/targa" />
 
     <EditText
         android:layout_marginLeft="@dimen/left_padding_30"
@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/ita_tipo" />
+        android:text="@string/tipo" />
 
     <EditText
         android:layout_marginLeft="@dimen/left_padding_30"
@@ -42,7 +42,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/ita_cancella_targa"
+        android:text="@string/cancella_targa"
         android:id="@+id/btnElimina"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>

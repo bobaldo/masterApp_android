@@ -6,7 +6,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/ita_inserisci_targa"/>
+        android:text="@string/inserisci_targa"/>
 
     <EditText
         android:layout_width="fill_parent"
@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/ita_seleziona_tipo"
+        android:text="@string/seleziona_tipo"
         android:id="@+id/textView2"
         android:layout_gravity="center_vertical" />
 
@@ -25,6 +25,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtTipo"
-        android:entries="@array/ita_tipi"
+        android:entries="@array/tipi"
         android:layout_gravity="center_vertical" />
 </LinearLayout>

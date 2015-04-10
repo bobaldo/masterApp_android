@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/ita_selezionata_targa" />
+        android:text="@string/selezionata_targa" />
 
     <EditText
         android:layout_marginLeft="@dimen/left_padding_30"
@@ -33,7 +33,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="imposta Data"
+            android:text="@string/imposta_data"
             android:id="@+id/btnDataTagliando" />
     </LinearLayout>
 
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/ita_spesa_tagliando"
+        android:text="@string/spesa_tagliando"
         android:layout_gravity="center_vertical" />
 
     <EditText
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:numeric="decimal"
-        android:text="@string/ita_note"
+        android:text="@string/note"
         android:layout_gravity="center_vertical" />
 
     <EditText

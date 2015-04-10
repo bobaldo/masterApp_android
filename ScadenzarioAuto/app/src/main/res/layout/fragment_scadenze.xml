@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/ita_scadenza_assicurazione" />
+        android:text="@string/scadenza_assicurazione" />
 
     <LinearLayout
         android:layout_marginLeft="@dimen/left_padding_30"
@@ -26,7 +26,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="imposta Data"
+            android:text="@string/imposta_data"
             android:id="@+id/btnScadenzaAssicurazione" />
 
     </LinearLayout>
@@ -35,7 +35,7 @@
         android:layout_marginLeft="@dimen/left_padding_30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ita_avviso_assicurazione"
+        android:text="@string/avviso_assicurazione"
         android:id="@+id/txtAllarmaScadenzaAssicurazione" />
 
     <TextView
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/ita_scadenza_bollo" />
+        android:text="@string/scadenza_bollo" />
 
     <LinearLayout
         android:layout_marginLeft="@dimen/left_padding_30"
@@ -60,7 +60,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="imposta Data"
+            android:text="@string/imposta_data"
             android:id="@+id/btnScadenzaBollo" />
     </LinearLayout>
 
@@ -68,7 +68,6 @@
         android:layout_marginLeft="@dimen/left_padding_30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ita_avviso_bollo"
+        android:text="@string/avviso_bollo"
         android:id="@+id/txtAllarmaScadenzaBollo" />
-
 </LinearLayout>
