@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_column="3"
+    android:layout_row="1"
+    android:layout_gravity="center"
+    android:columnCount="3"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:layout_gravity="fill"
+        android:minHeight="@dimen/activity_mezzo_minMeasure"
+        android:minWidth="@dimen/activity_mezzo_minMeasure"
+        android:id="@+id/btnInfo"
+        android:src="@drawable/info"
+        android:layout_row="0"
+        android:layout_column="0" />
+
+    <ImageButton
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:layout_gravity="fill"
+        android:minHeight="@dimen/activity_mezzo_minMeasure"
+        android:minWidth="@dimen/activity_mezzo_minMeasure"
+        android:src="@drawable/scadenze"
+        android:id="@+id/btnScadenze"
+        android:layout_row="0"
+        android:layout_column="1" />
+
+    <ImageButton
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:layout_gravity="fill"
+        android:minHeight="@dimen/activity_mezzo_minMeasure"
+        android:minWidth="@dimen/activity_mezzo_minMeasure"
+        android:src="@drawable/tagliando"
+        android:id="@+id/btnTagliandi"
+        android:layout_row="0"
+        android:layout_column="2" />
+</GridLayout>
