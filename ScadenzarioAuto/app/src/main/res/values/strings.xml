@@ -45,5 +45,6 @@
     <string name="ita_aggiungi_tagliando_per">aggiungi tagliando per</string>
     <string name="ita_modifica_tagliando_per">modifica tagliando per</string>
     <string name="ita_avviso_impossibile_impostare_allarme">impossibile impostare allarme</string>
-    <!--string name="ita_notifica_assicurazione">la tua assicurazione sulla targa %s scade il %s</string-->
+    <string name="ita_notifica_scadenza_bollo">targa %1$s scadenza bollo il %2$s</string>
+    <string name="ita_notifica_scadenza_assicurazione">targa %1$s scadenza assicurazione il %2$s</string>
 </resources>

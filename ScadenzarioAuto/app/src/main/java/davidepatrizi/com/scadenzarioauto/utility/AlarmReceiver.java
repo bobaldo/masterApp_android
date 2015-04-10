@@ -47,14 +47,13 @@ public class AlarmReceiver extends BroadcastReceiver {
             Log.w("PD: ", "targa: " + targa);
 
             Resources res = context.getResources();
-            String aux = "targa %s scadenza il %s";
             switch (tipoAlarm) {
                 case Constant.ALARM_SCADENZA_ASSICURAZIONE:
                     builder = new NotificationCompat.Builder(context)
                             .setSmallIcon(R.drawable.icona)
                             .setContentTitle(res.getString(R.string.ita_scadenza_assicurazione))
                             .setColor(Color.RED)
-                            .setContentText(String.format(aux, targa.toUpperCase(), scadenza));
+                            .setContentText(String.format(res.getString(R.string.ita_notifica_scadenza_assicurazione), targa.toUpperCase(), scadenza));
                     notification = builder.build();
                     nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                     nm.notify(Constant.NOTIFICA_SCADENZA_ASSICURAZIONE, notification);
@@ -66,7 +65,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                             .setSmallIcon(R.drawable.abc_btn_radio_material)
                             .setContentTitle(res.getString(R.string.ita_scadenza_bollo))
                             .setColor(Color.RED)
-                            .setContentText(String.format(aux, targa.toUpperCase(), scadenza));
+                            .setContentText(String.format(res.getString(R.string.ita_notifica_scadenza_bollo), targa.toUpperCase(), scadenza));
                     notification = builder.build();
                     nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                     nm.notify(Constant.NOTIFICA_SCADENZA_BOLLO, notification);
