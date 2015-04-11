@@ -46,6 +46,9 @@ public class AlarmReceiver extends BroadcastReceiver {
             Log.w("PD: ", "scadenza: " + scadenza);
             Log.w("PD: ", "targa: " + targa);
 
+            //TODO:  icona piccola,
+            //TODO: cambiare il formato della data in dd/mm/yyyy
+
             Resources res = context.getResources();
             switch (tipoAlarm) {
                 case Constant.ALARM_SCADENZA_ASSICURAZIONE:
