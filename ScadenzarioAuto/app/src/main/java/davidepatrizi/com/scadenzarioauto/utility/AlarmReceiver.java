@@ -46,9 +46,6 @@ public class AlarmReceiver extends BroadcastReceiver {
             Log.w("PD: ", "scadenza: " + scadenza);
             Log.w("PD: ", "targa: " + targa);
 
-            //TODO:  icona piccola,
-            //TODO: cambiare il formato della data in dd/mm/yyyy
-
             Resources res = context.getResources();
             switch (tipoAlarm) {
                 case Constant.ALARM_SCADENZA_ASSICURAZIONE:
@@ -65,7 +62,6 @@ public class AlarmReceiver extends BroadcastReceiver {
                 case Constant.ALARM_SCADENZA_BOLLO:
                     builder = new NotificationCompat.Builder(context)
                             .setSmallIcon(R.drawable.icona)
-                            .setSmallIcon(R.drawable.abc_btn_radio_material)
                             .setContentTitle(res.getString(R.string.scadenza_bollo))
                             .setColor(Color.RED)
                             .setContentText(String.format(res.getString(R.string.notifica_scadenza_bollo), targa.toUpperCase(), scadenza));
@@ -87,10 +83,10 @@ public class AlarmReceiver extends BroadcastReceiver {
         int month = calendar.get(Calendar.MONTH);
         calendar.set(Calendar.MONTH, month - 1);
 
-        Log.w("PD", "scadenza: " + _scadenza + " allarme: " + calendar.getTime().toString());
+        Log.w("PD", "scadenza: " + _scadenza + " allarme: " + DateManage.getDate(calendar));
         intentAssicurazione = new Intent(context, AlarmReceiver.class);
         intentAssicurazione.putExtra(Constant.TIPO_ALARM, tipoAlarm);
-        intentAssicurazione.putExtra(Constant.SCADENZA, calendar.getTime().toString());
+        intentAssicurazione.putExtra(Constant.SCADENZA, DateManage.getDate(calendar).toString());
         intentAssicurazione.putExtra(Constant.TARGA, targa);
         pendingIntentAssicurazione = PendingIntent.getBroadcast(context, 0, intentAssicurazione, 0);
         am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);

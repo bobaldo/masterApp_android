@@ -24,4 +24,15 @@ public class DateManage {
         }
         return ret;
     }
+
+    public static StringBuilder getDate(Calendar calendar) {
+        StringBuilder ret = new StringBuilder();
+        try {
+            ret.append(calendar.get(Calendar.DAY_OF_MONTH)).append("-")
+                    .append(calendar.get(Calendar.MONTH) + 1).append("-")
+                    .append(calendar.get(Calendar.YEAR)).append(" ");
+        } catch (Exception ex) {
+        }
+        return ret;
+    }
 }
