@@ -36,6 +36,12 @@ public class MezzoActivity extends ActionBarActivity {
     private boolean isShowChoose = false;
 
     @Override
+    public void onResume() {
+        super.onResume();
+        //TODO: add gestione onResume
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mezzo);
